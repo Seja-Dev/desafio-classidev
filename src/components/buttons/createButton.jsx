@@ -2,11 +2,11 @@ import styled from "styled-components"
 
 const StyledButton = styled.button`
     background-color: #f28000;
-    width: 200px;
-    padding: 17px 50px;
+    width: 261px;
+    height: 56px;
     margin-right: 100px;
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
 `

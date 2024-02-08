@@ -2,7 +2,8 @@ import styled from "styled-components"
 
 const ContainerSearch = styled.div`
     background-color: #a4a4a4;
-    height: 60px;
+    width: 704px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
