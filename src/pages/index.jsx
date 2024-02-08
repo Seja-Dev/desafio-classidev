@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Navbar from "@/components/navbar/navbar"
 import Search from "@/components/search/search"
 import Classefields from "@/components/classifieds/classifields"
+import Footer from "@/components/footer/footer"
 
 const SearchContainer = styled.div`
   display: flex;
@@ -35,6 +36,7 @@ function HomePage () {
         <Classefields/>
         <Classefields/>
       </ClassefieldsContainer>
+      <Footer/>
     </>
   )
 }
