@@ -5,6 +5,10 @@ import Search from "@/components/search/search"
 import Classefields from "@/components/classifieds/classifields"
 import Footer from "@/components/footer/footer"
 
+const StyledDiv = styled.div`
+  background: linear-gradient(to bottom, #424242 0%, #000000 100%);
+`
+
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
@@ -23,7 +27,7 @@ const ClassefieldsContainer = styled.div`
 function HomePage () {
 
   return (
-    <>
+    <StyledDiv>
       <Navbar />
       <SearchContainer>
         <Search/>
@@ -37,7 +41,7 @@ function HomePage () {
         <Classefields/>
       </ClassefieldsContainer>
       <Footer/>
-    </>
+    </StyledDiv>
   )
 }
 

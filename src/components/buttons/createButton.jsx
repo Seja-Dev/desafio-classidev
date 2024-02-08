@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Link from "next/link"
 
 const StyledButton = styled.button`
     background-color: #f28000;
@@ -11,10 +12,15 @@ const StyledButton = styled.button`
     cursor: pointer;
 `
 
-
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: white;
+`
 
 export default function CreateButton({ children }) {
     return(
-        <StyledButton>{children}</StyledButton>
+        <StyledLink href="/create">
+            <StyledButton>{children}</StyledButton>
+        </StyledLink>
     )
 }
