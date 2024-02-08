@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
       background: linear-gradient(to bottom, #424242 0%, #000000 100%);
       margin: 0;
       padding: 0;
-      height: 100vh;
     }
 `
 
