@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 import CreateButton from "../buttons/createButton"
+import Link from "next/link"
 
 const StyledNavbar = styled.div`
     height: 100px;
@@ -25,6 +26,7 @@ const Logo = styled.h1`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    cursor: pointer;
 `
 
 const Description = styled.h3`
@@ -35,14 +37,16 @@ const Description = styled.h3`
     line-height: normal;
 `
 
-export default function Navbar() {
+export default function Navbar({ button }) {
     return(
         <StyledNavbar>
             <LogoContainer>
-                <Logo>ClassifiDev</Logo>
+                <Link href="/">
+                    <Logo>ClassifiDev</Logo>
+                </Link>
                 <Description>O seu classificado online</Description>
             </LogoContainer>
-            <CreateButton>Criar anúncio</CreateButton>
+            {button && <CreateButton>Criar anúncio</CreateButton>}
         </StyledNavbar>
     )
 }

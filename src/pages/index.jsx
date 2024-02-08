@@ -28,7 +28,7 @@ function HomePage () {
 
   return (
     <StyledDiv>
-      <Navbar />
+      <Navbar button/>
       <SearchContainer>
         <Search/>
       </SearchContainer>
