@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 import Navbar from "@/components/navbar/navbar"
 import Back from "@/components/layout/back/back"
+import Container from "@/components/layout/container/container"
 
 const StyledDiv = styled.div`
     height: 100vh;
@@ -12,7 +13,9 @@ export default function Post() {
     return(
         <StyledDiv>
             <Navbar/>
-            <Back/>
+            <Container>
+                <Back/>
+            </Container>
         </StyledDiv>
     )
 }
