@@ -49,7 +49,7 @@ export default function Classefields({ category, product, price, date, descripti
             <StyledClass>
                 <ProductsAndDate>
                     <Product>{product}</Product>
-                    <Date>postado em {date}</Date>
+                    <Date>{date}</Date>
                 </ProductsAndDate>
                 <Price>R$ {price}</Price>
                 <Description>{description}</Description>

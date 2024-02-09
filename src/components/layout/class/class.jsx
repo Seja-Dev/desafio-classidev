@@ -9,13 +9,18 @@ const ClassContainer = styled.div`
 const Text = styled.p`
     font-size: 14px;
     font-weight: 700;
+    color: ${props => props.white ? "white" : "black"};
 `
 
-export default function Class({ category }) {
+export default function Class({ category, white }) {
     return(
         <ClassContainer>
-            <img src={category + ".png"}/>
-            <Text>{category}</Text>
+            {
+                white ? 
+                <img src={category + "White.png"}/> :
+                <img src={category + ".png"}/> 
+            }
+            <Text white={white}>{category}</Text>
         </ClassContainer>
     )
 }
