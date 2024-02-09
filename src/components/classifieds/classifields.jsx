@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Link from "next/link"
 
 const StyledClass = styled.div`
     width: 334px;
@@ -10,6 +11,7 @@ const StyledClass = styled.div`
     justify-content: center;
     gap: 29px;
     padding: 0 24px;
+    cursor: pointer;
 `
 
 const ProductsAndDate = styled.div`
@@ -56,17 +58,19 @@ const Class = styled.p`
 
 export default function Classefields() {
     return(
-        <StyledClass>
-            <ProductsAndDate>
-                <Product>Palio 2020</Product>
-                <Date>Postado em 22/02/2022</Date>
-            </ProductsAndDate>
-            <Price>R$ 20.000,00</Price>
-            <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</Description>
-            <ClassContainer>
-                <img src="car.png"/>
-                <Class>Carros</Class>
-            </ClassContainer>
-        </StyledClass>
+        <Link href="/post">
+            <StyledClass>
+                <ProductsAndDate>
+                    <Product>Palio 2020</Product>
+                    <Date>Postado em 22/02/2022</Date>
+                </ProductsAndDate>
+                <Price>R$ 20.000,00</Price>
+                <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</Description>
+                <ClassContainer>
+                    <img src="car.png"/>
+                    <Class>Carros</Class>
+                </ClassContainer>
+            </StyledClass>
+        </Link>
     )
 }
