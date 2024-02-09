@@ -33,12 +33,48 @@ function HomePage () {
         <Search/>
       </SearchContainer>
       <ClassefieldsContainer>
-        <Classefields category="carros"/>
-        <Classefields category="eletrônicos"/>
-        <Classefields category="carros"/>
-        <Classefields category="roupas"/>
-        <Classefields category="carros"/>
-        <Classefields category="carros"/>
+        <Classefields
+          category="carros"
+          product="Palio 2020"
+          price="20.000,00"
+          date="22/02/2022"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
+        />
+        <Classefields
+          category="carros"
+          product="Palio 2020"
+          price="20.000,00"
+          date="22/02/2022"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
+        />
+        <Classefields
+          category="carros"
+          product="Palio 2020"
+          price="20.000,00"
+          date="22/02/2022"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
+        />
+        <Classefields
+          category="carros"
+          product="Palio 2020"
+          price="20.000,00"
+          date="22/02/2022"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
+        />
+        <Classefields
+          category="eletrônicos"
+          product="Palio 2020"
+          price="20.000,00"
+          date="22/02/2022"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
+        />
+        <Classefields
+          category="carros"
+          product="Palio 2020"
+          price="20.000,00"
+          date="22/02/2022"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
+        />
       </ClassefieldsContainer>
       <Footer/>
     </StyledDiv>

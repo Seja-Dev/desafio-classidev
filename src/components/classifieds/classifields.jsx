@@ -43,16 +43,16 @@ const Description = styled.p`
     font-weight: 300;
 `
 
-export default function Classefields({ category }) {
+export default function Classefields({ category, product, price, date, description }) {
     return(
         <Link href="/post">
             <StyledClass>
                 <ProductsAndDate>
-                    <Product>Palio 2020</Product>
-                    <Date>Postado em 22/02/2022</Date>
+                    <Product>{product}</Product>
+                    <Date>postado em {date}</Date>
                 </ProductsAndDate>
-                <Price>R$ 20.000,00</Price>
-                <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</Description>
+                <Price>R$ {price}</Price>
+                <Description>{description}</Description>
                 <Class
                     category={category}
                 />
