@@ -29,6 +29,7 @@ const StyledForm = styled.form`
     width: 100%;
     align-items: center;
     gap: 15px;
+    margin-bottom: 150px;
 `
 
 export default function Create() {

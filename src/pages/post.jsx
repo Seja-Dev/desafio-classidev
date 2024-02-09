@@ -5,6 +5,7 @@ import Back from "@/components/layout/back/back"
 import Container from "@/components/layout/container/container"
 import Date from "@/components/layout/date/date"
 import Class from "@/components/layout/class/class"
+import Footer from "@/components/footer/footer"
 
 const StyledDiv = styled.div`
     height: 100vh;
@@ -37,6 +38,7 @@ const InfoContainer = styled.div`
     flex-direction: column;
     gap: 20px;
     margin-top: 15px;
+    margin-bottom: 200px;
 `
 
 const Price = styled.h3`
@@ -104,6 +106,7 @@ export default function Post({ deleted }) {
                     </ContactContainer>
                 </InfoContainer>
             </Container>
+            <Footer/>
         </StyledDiv>
     )
 }

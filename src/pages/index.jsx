@@ -22,6 +22,7 @@ const ClassefieldsContainer = styled.div`
   gap: 20px;
   justify-content: center;
   margin-left: 40px;
+  margin-bottom: 150px;
 `
 
 function HomePage () {

@@ -8,9 +8,8 @@ const StyledNavbar = styled.div`
     width: 100%;
     background-color: #1f1f1f;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 0 20px;
 `
 
 const LogoContainer = styled.div`
@@ -29,6 +28,14 @@ const Logo = styled.h1`
     cursor: pointer;
 `
 
+const LogoAndButton = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 90%;
+`
+
 const Description = styled.h3`
     color: #818181;
     font-size: 20px;
@@ -40,13 +47,15 @@ const Description = styled.h3`
 export default function Navbar({ button }) {
     return(
         <StyledNavbar>
-            <LogoContainer>
-                <Link href="/">
-                    <Logo>ClassifiDev</Logo>
-                </Link>
-                <Description>O seu classificado online</Description>
-            </LogoContainer>
-            {button && <CreateButton>Criar anúncio</CreateButton>}
+            <LogoAndButton>
+                <LogoContainer>
+                    <Link href="/">
+                        <Logo>ClassifiDev</Logo>
+                    </Link>
+                    <Description>O seu classificado online</Description>
+                </LogoContainer>
+                {button && <CreateButton>Criar anúncio</CreateButton>}
+            </LogoAndButton>
         </StyledNavbar>
     )
 }
