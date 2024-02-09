@@ -33,12 +33,12 @@ function HomePage () {
         <Search/>
       </SearchContainer>
       <ClassefieldsContainer>
-        <Classefields/>
-        <Classefields/>
-        <Classefields/>
-        <Classefields/>
-        <Classefields/>
-        <Classefields/>
+        <Classefields category="carros"/>
+        <Classefields category="eletrônicos"/>
+        <Classefields category="carros"/>
+        <Classefields category="roupas"/>
+        <Classefields category="carros"/>
+        <Classefields category="carros"/>
       </ClassefieldsContainer>
       <Footer/>
     </StyledDiv>

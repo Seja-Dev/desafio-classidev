@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import Link from "next/link"
 
+import Class from "../layout/class/class"
+import Date from "../layout/date/date"
+
 const StyledClass = styled.div`
     width: 334px;
     height: 313px;
@@ -25,12 +28,6 @@ const Product = styled.h2`
     line-height: normal;
 `
 
-const Date = styled.p`
-    font-size: 14px;
-    font-style: italic;
-    font-weight: 300;
-`
-
 const Price = styled.h4`
     color: #0E0E0E;
     font-size: 20px;
@@ -46,17 +43,7 @@ const Description = styled.p`
     font-weight: 300;
 `
 
-const ClassContainer = styled.div`
-    display: flex;
-    align-items: center;
-`
-
-const Class = styled.p`
-    font-size: 14px;
-    font-weight: 700;
-`
-
-export default function Classefields() {
+export default function Classefields({ category }) {
     return(
         <Link href="/post">
             <StyledClass>
@@ -66,10 +53,9 @@ export default function Classefields() {
                 </ProductsAndDate>
                 <Price>R$ 20.000,00</Price>
                 <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</Description>
-                <ClassContainer>
-                    <img src="car.png"/>
-                    <Class>Carros</Class>
-                </ClassContainer>
+                <Class
+                    category={category}
+                />
             </StyledClass>
         </Link>
     )
