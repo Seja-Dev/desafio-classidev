@@ -5,10 +5,11 @@ import Input from "@/components/form/input/input"
 import Category from "@/components/form/category/category"
 import Textarea from "@/components/form/textarea/textearea"
 import FormButton from "@/components/buttons/formButton"
+import Footer from "@/components/footer/footer"
 
 const StyledDiv = styled.div`
     background: #0e0e0e;
-    height: 100vh;
+    height: 100%;
 `
 
 const StyledCreate = styled.div`
@@ -45,6 +46,7 @@ export default function Create() {
                 <Textarea/>
                 <FormButton>Criar anúncio</FormButton>
             </StyledForm>
+            <Footer/>
         </StyledDiv>
     )
 }
