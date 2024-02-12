@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { joiResolver } from '@hookform/resolvers/joi'
+import { joiResolver } from '@hookform/resolvers/joi';
 import axios from 'axios'
 import { useSWRConfig } from "swr";
 

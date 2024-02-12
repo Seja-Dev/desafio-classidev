@@ -53,7 +53,7 @@ const Description = styled.p`
   font-weight: 300;
   line-height: 17px;
   text-align: left;
-  color: ${(props) => props.theme.colors.textSubColor};
+  color: ${(props) => props.theme.textSubColor};
 `
 const CategoryContainer = styled.div`
   display: flex;

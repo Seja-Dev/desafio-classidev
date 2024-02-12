@@ -1,10 +1,10 @@
 import styled from "styled-components"
  
 const StyledButton = styled.button`
-  background-color : ${props => props.theme.primary};
+  background-color : ${props => props.theme.colors.primary};
   border: 0;
   font-weight :bold;
-  color:${props => props.theme.white};
+  color:${props => props.theme.colors.white};
   font-size: 16px;
   transition: 0.4s;
   background: rgba(242, 128, 0, 1);

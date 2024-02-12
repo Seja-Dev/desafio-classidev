@@ -27,7 +27,7 @@ const StyledInput = styled.input`
   font-weight: 400;
   line-height: 24px;
   ::placeholder {
-    color: ${(props)  => props.theme.colors.textColor};
+    color: ${(props)  => props.theme.textColor};
   }
 `
 const StyledInputAlt = styled(StyledInput)`
@@ -43,7 +43,7 @@ const Lupa = styled.img`
 const Line = styled.div`
   height: 100%;
   width: 1px;
-  background-color: ${(props)  => props.theme.colors.textColor} ;
+  background-color: ${(props)  => props.theme.textColor} ;
   margin-left: 75px;
 `
 const TextContainer = styled.div`
@@ -54,7 +54,7 @@ const TextContainer = styled.div`
 `
 const Text = styled.h3`
   font-size: 15px;
-  color: ${(props)  => props.theme.colors.textColor};
+  color: ${(props)  => props.theme.textColor};
   font-style: oblique;
   font-weight: 400;
 `
