@@ -72,24 +72,15 @@ const CategoryImg = styled.img`
   width: 20.98px;
   height: 20px;
 `
-const AnnouncementData = [
-  {
-    title: 'Palio 2023',
-    datePosted: 'Postado 22/02/2022',
-    price: 'R$ 20.000,00',
-    description:  'Lorem ipsum dolor sit amet, consectetur adipiscing elit dwefiwefihweiufhwehfwe fewiofwieofwefwi wfpwejfowefwh wpfoiwejfiowe thtrhrthtrhtrhrhrtnr htrbhtrbrtbrtbrttrb',
-    categoryImg: '/car.png',
-    categoryName: 'Carros'
-  },
-]
 
-export default function Card({title,date, price,description,category}){
+export default function Card({title,date, price,description,category,id}){
   const router = useRouter()
+
   return(
     <CardContainer>
         <StyledCard onClick={() => router.push('/reviewAnnouncement')} >
             <Title>{title}</Title>
-            <DatePosted>{date}</DatePosted>
+            <DatePosted>{moment(date).format('LLL')}</DatePosted>
             <Price>{price}</Price>
             <Description>{description}</Description>
             <CategoryContainer>

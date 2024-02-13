@@ -1,16 +1,16 @@
 import styled from "styled-components";
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { joiResolver } from '@hookform/resolvers/joi';
-import axios from 'axios'
-import { useSWRConfig } from "swr";
-
-import { createCardSchema } from "../../../modules/card.model"; 
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi'
+import axios from 'axios';
+import { useSWRConfig } from 'swr'
+import { useRouter } from "next/router";
 
 import Input from "../form/Input";
 import Button from "../form/Button";
+import { createCardSchema } from "../../../modules/card.schema";
 
-const Container  = styled.div`
+const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -21,35 +21,45 @@ const Container  = styled.div`
   padding-bottom: 70px;
   background: ${(props) => props.theme.colors.background};
 `;
+
 const Title = styled.h1`
   font-size: 48px;
   font-weight: 700;
   line-height: 58px;
   color: ${(props) => props.theme.colors.white};
-`
+`;
+
 const FormContainer = styled.div`
   margin-top: 50px;
-`
+`;
+
 const Form = styled.form`
  display: flex;
  flex-direction: column;
  margin: 20px 0;
  gap: 20px;
-`
+`;
+
 const InputAlt = styled(Input)`
   height: 126px;
-  align-items: flex-start;
-`
+  ::placeholder{
+    align-items: flex-end;
+  }
+  
+`;
+
 const ButtonAlt = styled(Button)`
   width: 504px;
-`
+`;
+
 export default function CreateCard(){
-  const { mutate } = useSWRConfig()
-  const {control,handleSubmit, formState: { isValid}, reset } = useForm({
+  const router = useRouter()
+  const { control, handleSubmit, formState: { isValid }, reset } = useForm({
     resolver: joiResolver(createCardSchema),
     mode: 'all'
-  })
+  });
 
+  const { mutate } = useSWRConfig()
   const [loading, setLoading] = useState(false)
   const onSubmit =  async (data) => {
     setLoading(true)
@@ -58,40 +68,47 @@ export default function CreateCard(){
       reset()
       mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/card`)
       setLoading(false)
+      router.push('/')
     } 
   } 
-  return(
+  return (
     <Container>
-          <Title>Crie seu anúncio </Title>
-          <FormContainer>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              <Input 
-              placeholder='Nome do produto'
-              name="title"
-              control={control} 
-               type2 />
-              <Input 
-              placeholder='Selecione a categoria'
-              name='category'
-              control={control}
-               type2 />
-              <Input 
-              placeholder='Preço'
-              name='price'
-              control={control}
-               type2 />
-              <Input 
-              placeholder='Whatsapp'
-              name='price'
-              control={control} 
-               type2 />
-              <InputAlt placeholder='Descrição'
-               name='description'
-               control={control} 
-               type2 />
-              <ButtonAlt loading={loading} disabled={!isValid} >Criar anúncio</ButtonAlt>
-            </Form>
-          </FormContainer>
-      </Container>
-  )
+      <Title>Crie seu anúncio </Title>
+      <FormContainer>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Input 
+            placeholder='Nome do produto'
+            name="title"
+            control={control} 
+            type2 
+          />
+          <Input 
+            placeholder='Selecione a categoria'
+            name='category'
+            control={control}
+            type2 
+          />
+          <Input 
+            placeholder='Preço'
+            name='price'
+            control={control}
+            type2 
+          />
+          <Input 
+            placeholder='Whatsapp'
+            name='price'
+            control={control} 
+            type2 
+          />
+          <InputAlt 
+            placeholder='Descrição'
+            name='description'
+            control={control} 
+            type2 
+          />
+          <ButtonAlt loading={loading} disabled={!isValid}>Criar anúncio</ButtonAlt>
+        </Form>
+      </FormContainer>
+    </Container>
+  );
 }

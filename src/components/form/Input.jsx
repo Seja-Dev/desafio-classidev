@@ -27,7 +27,7 @@ const StyledInput = styled.input`
   font-weight: 400;
   line-height: 24px;
   ::placeholder {
-    color: ${(props)  => props.theme.textColor};
+    color: ${(props)  => props.theme.colors.textColor};
   }
 `
 const StyledInputAlt = styled(StyledInput)`
