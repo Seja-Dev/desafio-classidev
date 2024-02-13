@@ -46,6 +46,4 @@ router.get(async (req, res) => {
       return res.status(500).send(err.message)
     }
   })
-
-
 export default router

@@ -3,6 +3,8 @@ import moment from 'moment'
 import axios from 'axios'
 import { useSWRConfig } from "swr"
 import { useRouter } from "next/router";
+import { useState } from 'react'
+import EditCard from "../card/EditCard";
 
 const ReviewContainer = styled.div`
   display: flex;
@@ -125,8 +127,17 @@ const TextContact = styled.h2`
   color: ${(props) => props.theme.colors.white};
 `
 
-export default function Review ({title,date,price,description,category}){
+export default function Review ({title,price,date,description,category,id}){
   const router = useRouter()
+  const { mutate } = useSWRConfig()
+  const [editCard , setEditCard] = useState(false)
+  const handleEdit = async () => {
+    setEditPost(true)
+  }
+  const handleSaveEdit =  () => {
+    setEditPost(false)
+    mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/card`)
+  }
 
   return(
     <ReviewContainer>
@@ -135,10 +146,18 @@ export default function Review ({title,date,price,description,category}){
               <TextLink onClick={() => router.push('/')}>Voltar para a página inicial</TextLink>
           </TextContainer>
           <TilteContainer>
-              <Title>{title}</Title>
+              <Title>
+                {!editCard && title}
+                {editCard && 
+                <EditCard 
+                id={id} 
+                title={title}
+                onSave={handleSaveEdit}  />
+                }
+              </Title>
               <StyledFlex>
                   <EditImg src='/edit.png'/>
-                  <TextEdit>Editar</TextEdit>
+                  <TextEdit onClick={handleEdit}>Editar</TextEdit>
               </StyledFlex>
               <StyledFlex>
                   <TrashImg src='/trash.png' />
@@ -147,12 +166,36 @@ export default function Review ({title,date,price,description,category}){
           </TilteContainer>
           <CategoryContainer>
             <CategoryImg src='/car-white.png' />
-            <CategoryName>{category}</CategoryName>
+            <CategoryName> 
+              {!editCard && category}
+              {editCard && 
+                <EditCard 
+                id={id} 
+                category={category}
+                onSave={handleSaveEdit}  /> 
+              }
+            </CategoryName>
           </CategoryContainer>
           <DatePosted>Postado {moment(date).format('LLL')}</DatePosted>
-          <Price>{price}</Price>
+          <Price>
+            {!editCard && price}
+            {editCard && 
+                <EditCard 
+                id={id} 
+                price={price}
+                onSave={handleSaveEdit}  /> 
+            }
+          </Price>
           <DescriptionContainer>
-              <Description>{description}</Description>
+              <Description> 
+                {!editCard && description}
+                {editCard && 
+                <EditCard 
+                id={id} 
+                description={description}
+                onSave={handleSaveEdit}  /> 
+            }
+            </Description>
           </DescriptionContainer>
           <TextContact>Gostou? Entre em contato</TextContact>
           <ContactContainer>
