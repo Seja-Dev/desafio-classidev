@@ -10,6 +10,11 @@ import Anuncio from './card.model'
       description: body.description,
       category: body.category
     })}
-
+    export const getCards = async (limit = 10) => {
+      return await Anuncio.find()
+      .sort({createdDate: -1}) 
+      .limit(limit)
+    }
+  
   
  

@@ -1,5 +1,5 @@
 import createHandler from '../../../lib/middlewares/nextConnect'
-import { createCard } from '../../../modules/card.service'; 
+import { createCard, getCards } from '../../../modules/card.service'; 
  import { createCardSchema } from '../../../modules/card.schema';
 import validation from '../../../lib/middlewares/validation';
 
@@ -14,5 +14,14 @@ router.post(validation({body:createCardSchema}), async (req, res) => {
         res.status(400).json(err.message);
     }
 });
+router.get(async (req, res) => {
+    try {
+  
+      const cards = await getCards()
+      res.status(200).send(cards)
+    } catch (err) {
+      return res.status(500).send(err.message)
+    }
+  });
 
 export default router
