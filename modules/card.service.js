@@ -15,6 +15,10 @@ import Anuncio from './card.model'
       .sort({createdDate: -1}) 
       .limit(limit)
     }
-  
+    export const deleteCard = async (id) => {
+      return await Anuncio.findOneAndDelete({
+        _id: id,
+      })
+    }
   
  

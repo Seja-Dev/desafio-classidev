@@ -1,6 +1,6 @@
 import createHandler from '../../../lib/middlewares/nextConnect'
-import { createCard, getCards } from '../../../modules/card.service'; 
- import { createCardSchema } from '../../../modules/card.schema';
+import { createCard, getCards,deleteCard } from '../../../modules/card.service'; 
+ import { createCardSchema,deleteCardSchema } from '../../../modules/card.schema';
 import validation from '../../../lib/middlewares/validation';
 
 const router = createHandler();
@@ -23,5 +23,18 @@ router.get(async (req, res) => {
       return res.status(500).send(err.message)
     }
   });
+  router.delete(validation(deleteCardSchema), async (req, res) => {
+    try {
+      const deletedCard = await deleteCard(req.body.id)
+      if (deletedCard)
+        return res.status(200).send({ ok: true }) 
+
+      return res.status(400).send('post not found')
+    } catch (err) {
+      return res.status(500).send(err.message)
+    }
+  });
+
+
 
 export default router

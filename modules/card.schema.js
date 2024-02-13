@@ -9,3 +9,8 @@ export const createCardSchema = Joi.object({
    description:  Joi.string().required().max(256),
    category :  Joi.string().required().max(256)
 })
+export const deleteCardSchema = Joi.object({
+  id: Joi.objectId().required()
+
+})  
+
