@@ -20,5 +20,18 @@ import Anuncio from './card.model'
         _id: id,
       })
     }
+    export const editCard = async (body, user) => {
+      return await Post.findOneAndUpdate({
+        _id: body.id,
+    
+      },{
+        title: body.title,
+        price: body.price,
+        description: body.description,
+        category: body.category
+      },{
+        new: true // mongoBD vai manda pra nós o documento ja atualizado
+      })
+    }
   
  
