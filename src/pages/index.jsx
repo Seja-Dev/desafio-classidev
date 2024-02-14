@@ -1,15 +1,13 @@
-import styled from "styled-components"
-
-import Navbar from "@/components/navbar/navbar"
-import Search from "@/components/search/search"
-import Classefields from "@/components/classifieds/classifields"
-import Footer from "@/components/footer/footer"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import Navbar from "@/components/navbar/navbar";
+import Search from "@/components/search/search";
+import Classefields from "@/components/classifieds/classifields";
+import Footer from "@/components/footer/footer";
 
 const StyledDiv = styled.div`
   background: linear-gradient(to bottom, #424242 0%, #000000 100%);
-  display: flex;  
-  flex-direction: column;
-  min-height: 100vh;
 `
 
 const SearchContainer = styled.div`
@@ -28,59 +26,40 @@ const ClassefieldsContainer = styled.div`
   margin-bottom: 150px;
 `
 
-function HomePage () {
+function HomePage() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('https://api-products-nine.vercel.app/products')
+        setProducts(response.data)
+      } catch (error) {
+        console.error('Erro ao buscar notas:', error)
+      }
+    }
+
+    fetchProducts()
+  }, [])
 
   return (
     <StyledDiv>
-      <Navbar button/>
+      <Navbar button />
       <SearchContainer>
-        <Search/>
+        <Search />
       </SearchContainer>
       <ClassefieldsContainer>
-        <Classefields
-          category="carros"
-          product="Palio 2020"
-          price="20.000,00"
-          date="22/02/2022"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
-        />
-        <Classefields
-          category="carros"
-          product="Palio 2020"
-          price="20.000,00"
-          date="22/02/2022"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
-        />
-        <Classefields
-          category="carros"
-          product="Palio 2020"
-          price="20.000,00"
-          date="22/02/2022"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
-        />
-        <Classefields
-          category="carros"
-          product="Palio 2020"
-          price="20.000,00"
-          date="22/02/2022"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
-        />
-        <Classefields
-          category="eletrônicos"
-          product="Palio 2020"
-          price="20.000,00"
-          date="22/02/2022"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
-        />
-        <Classefields
-          category="carros"
-          product="Palio 2020"
-          price="20.000,00"
-          date="22/02/2022"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..."
-        />
+        {products.map((product) => (
+          <Classefields
+            key={product._id}
+            category={product.category}
+            product={product.product}
+            price={product.price}
+            description={product.description}
+          />
+        ))}
       </ClassefieldsContainer>
-      <Footer/>
+      <Footer />
     </StyledDiv>
   )
 }
