@@ -1,15 +1,16 @@
+import { useState } from "react"
 import styled from "styled-components"
 
 const ContainerSearch = styled.div`
-    background-color: #a4a4a4;
-    width: 704px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding-right: 20px;
-    border-radius: 10px;
+  background-color: #a4a4a4;
+  width: 704px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
 `
 
 const Input = styled.input`
@@ -32,23 +33,37 @@ const Input = styled.input`
 `
 
 const Line = styled.div`
-    width: 1px;
-    height: 37px;
-    background-color: black;
+  width: 1px;
+  height: 37px;
+  background-color: black;
 `
 
 const Img = styled.img`
-    width: 20px;
-    cursor: pointer;
+  width: 20px;
+  cursor: pointer;
 `
 
-export default function Search() {
-    return(
-        <ContainerSearch>
-            <Input placeholder="Digite o que procura"/>
-            <Line/>
-            <h4>Todas as categorias</h4>
-            <Img  width="20px" src="triangulo.png"/>
-        </ContainerSearch>
-    )
+const Search = ({ setSearchTerm }) => {
+  const [searchValue, setSearchValue] = useState("")
+
+  const handleInputChange = (event) => {
+    const value = event.target.value
+    setSearchValue(value)
+    setSearchTerm(value)
+  }
+
+  return (
+    <ContainerSearch>
+      <Input
+        placeholder="Digite o que procura"
+        value={searchValue}
+        onChange={handleInputChange}
+      />
+      <Line />
+      <h4>Todas as categorias</h4>
+      <Img width="20px" src="triangulo.png" />
+    </ContainerSearch>
+  )
 }
+
+export default Search

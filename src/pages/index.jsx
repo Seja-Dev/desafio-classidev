@@ -32,22 +32,27 @@ const ClassefieldsContainer = styled.div`
 `
 
 function HomePage() {
-  //1) get
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
   const router = useRouter()
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('https://api-products-nine.vercel.app/products')
-        setProducts(response.data)
+        setProducts(response.data);
       } catch (error) {
-        console.error('Erro ao buscar notas:', error)
+        console.error('Erro ao buscar produtos:', error)
       }
     }
 
-    fetchProducts()
+    fetchProducts();
   }, [])
+
+  useEffect(() => {
+    setFilteredProducts(products.filter(product => product.product.toLowerCase().includes(searchTerm.toLowerCase())))
+  }, [searchTerm, products])
 
   const handleProductClick = (product) => {
     router.push({
@@ -60,10 +65,10 @@ function HomePage() {
     <StyledDiv>
       <Navbar button />
       <SearchContainer>
-        <Search />
+        <Search setSearchTerm={setSearchTerm} />
       </SearchContainer>
       <ClassefieldsContainer>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <Classefields
             key={product._id}
             category={product.category}
@@ -76,7 +81,7 @@ function HomePage() {
       </ClassefieldsContainer>
       <Footer />
     </StyledDiv>
-  );
+  )
 }
 
 export default HomePage;
