@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import styled from "styled-components";
-import Navbar from "@/components/navbar/navbar";
-import Search from "@/components/search/search";
-import Classefields from "@/components/classifieds/classifields";
-import Footer from "@/components/footer/footer";
+import { useState, useEffect } from "react"
+import { useRouter } from "next/router"
+import axios from "axios"
+import styled from "styled-components"
+
+import Navbar from "@/components/navbar/navbar"
+import Search from "@/components/search/search"
+import Classefields from "@/components/classifieds/classifields"
+import Footer from "@/components/footer/footer"
 
 const StyledDiv = styled.div`
   background: linear-gradient(to bottom, #424242 0%, #000000 100%);
+  display: flex;  
+  flex-direction: column;
+  min-height: 100vh;
 `
 
 const SearchContainer = styled.div`
@@ -27,7 +32,9 @@ const ClassefieldsContainer = styled.div`
 `
 
 function HomePage() {
+  //1) get
   const [products, setProducts] = useState([]);
+  const router = useRouter()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -41,6 +48,13 @@ function HomePage() {
 
     fetchProducts()
   }, [])
+
+  const handleProductClick = (product) => {
+    router.push({
+      pathname: '/post',
+      query: product,
+    })
+  }
 
   return (
     <StyledDiv>
@@ -56,12 +70,13 @@ function HomePage() {
             product={product.product}
             price={product.price}
             description={product.description}
+            onClick={() => handleProductClick(product)}
           />
         ))}
       </ClassefieldsContainer>
       <Footer />
     </StyledDiv>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Link from "next/link"
 
 import Class from "../layout/class/class"
 import Date from "../layout/date/date"
@@ -43,10 +42,9 @@ const Description = styled.p`
     font-weight: 300;
 `
 
-export default function Classefields({ category, product, price, date, description }) {
+export default function Classefields({ category, product, price, date, description, onClick }) {
     return(
-        <Link href="/post">
-            <StyledClass>
+            <StyledClass onClick={onClick}>
                 <ProductsAndDate>
                     <Product>{product}</Product>
                     <Date>{date}</Date>
@@ -57,6 +55,5 @@ export default function Classefields({ category, product, price, date, descripti
                     category={category}
                 />
             </StyledClass>
-        </Link>
     )
 }

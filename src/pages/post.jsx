@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { useRouter } from "next/router"
 
 import Navbar from "@/components/navbar/navbar"
 import Back from "@/components/layout/back/back"
@@ -75,14 +76,17 @@ const Contact = styled.h3`
     color: #cfcece;
 `
 
-export default function Post({ deleted }) {
+export default function Post() {
+    const router = useRouter()
+    const { category, product, price, description, whatsapp } = router.query
+
     return(
         <StyledDiv>
             <Navbar/>
             <Container>
                 <Back/>
                 <ProductContainer>
-                    <Product>Palio 2020</Product>
+                    <Product>{product}</Product>
                     <DeleteOrEdit>
                         <img src="edit.png" width="15px" height="15px"/>
                         <p>Editar</p>
@@ -95,16 +99,16 @@ export default function Post({ deleted }) {
                 </ProductContainer>
                 <InfoContainer>
                     <Class
-                        category="carros"
+                        category={category}
                         white
                     />
                     <Date white>22/02/2022</Date>
-                    <Price>R$ 20.000,00</Price>
-                    <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</Description>
+                    <Price> R$ {price}</Price>
+                    <Description>{description}</Description>
                     <Notice>Gostou? Entre em contato</Notice>
                     <ContactContainer>
                         <img src="telefone.png"/>
-                        <Contact>(88) 23232323 </Contact>
+                        <Contact>{whatsapp} </Contact>
                     </ContactContainer>
                 </InfoContainer>
             </Container>
