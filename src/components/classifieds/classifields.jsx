@@ -14,10 +14,12 @@ const StyledClass = styled.div`
     gap: 29px;
     padding: 0 24px;
     cursor: pointer;
+    word-wrap: break-word;
 
     @media (max-width: 400px) {
-        max-width: 290px;
-        height: 275px;
+        max-width: 310px;
+        height: 290px;
+        gap: 20px;
     } 
 `
 
@@ -30,6 +32,11 @@ const Product = styled.h2`
     font-size: 36px;
     font-weight: 700;
     line-height: normal;
+
+    @media (max-width: 425px) {
+        font-size: 26px;
+        font-weight: 500;
+    } 
 `
 
 const Price = styled.h4`

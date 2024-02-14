@@ -25,12 +25,21 @@ const ProductContainer = styled.div`
     align-items: end;
     gap: 20px;
     margin-top: 50px;
+
+    @media (max-width: 750px) {
+        flex-direction: column;
+        align-items: start;
+    }
 `
 
 const Product = styled.h1`
     color: white;
     font-weight: bolder;
     font-size: 46px;
+
+    @media (max-width: 425px) {
+        font-size: 30px;
+    }
 `
 
 const DeleteOrEdit = styled.div`
@@ -47,6 +56,10 @@ const InfoContainer = styled.div`
     gap: 20px;
     margin-top: 15px;
     margin-bottom: 200px;
+
+    @media (max-width: 900px) {
+        margin-bottom: 100px;
+    }
 `
 
 const Price = styled.h3`
@@ -61,7 +74,16 @@ const Description = styled.h3`
     font-weight: lighter;
     color:#b4b3b3;
     width: 930px;
-    margin: 40px 0;
+    margin: 40px 20px 40px 0;
+    word-wrap: break-word;
+
+    @media (max-width: 1100px) {
+        width: 500px;
+    }
+
+    @media (max-width: 680px) {
+        width: 300px;
+    }
 `
 
 const Notice = styled.h2`
