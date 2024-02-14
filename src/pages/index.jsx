@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import axios from "axios"
 import styled from "styled-components"
+import moment from "moment"
 
 import Navbar from "@/components/navbar/navbar"
 import Search from "@/components/search/search"
@@ -75,6 +76,7 @@ function HomePage() {
             product={product.product}
             price={product.price}
             description={product.description}
+            date={moment(product.createdAt).format('DD/MM/YYYY')}
             onClick={() => handleProductClick(product)}
           />
         ))}
