@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { useForm } from "react-hook-form"
 import axios from "axios"
+import { useState } from "react"
+import { useRouter } from "next/router"
 
 import Navbar from "@/components/navbar/navbar"
 import Input from "@/components/form/input/input"
@@ -35,12 +37,16 @@ const StyledForm = styled.form`
 `
 
 export default function Create() {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset } = useForm()
+    const [selectedCategory, setSelectedCategory] = useState("")
+    const router = useRouter()
 
     const onSubmit = async (data) => {
         try {
-            await axios.post('https://api-products-nine.vercel.app/products', data)
+            const formData = { ...data, category: selectedCategory }
+            await axios.post('https://api-products-nine.vercel.app/products', formData)
             reset()
+            router.push('/')
         } catch (error) {
             console.error('Erro ao enviar os dados:', error)
         }
@@ -56,7 +62,7 @@ export default function Create() {
                 <Input placeholder="Nome do produto" {...register("product")} />
                 <Input placeholder="Preço" {...register("price")} />
                 <Input placeholder="Whatsapp" {...register("whatsapp")} />
-                <Input placeholder="Categoria" {...register("category")} />
+                <Category onSelect={setSelectedCategory} value={selectedCategory}/>
                 <Textarea placeholder="Descrição" {...register("description")} />
                 <FormButton type="submit">Criar anúncio</FormButton>
             </StyledForm>

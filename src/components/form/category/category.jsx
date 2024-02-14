@@ -29,20 +29,27 @@ const TextAndImage = styled.div`
     height: 100%;
 `
 
-export default function Category() {
+export default function Category({ onSelect, value }) {
     const [isMenu, setIsMenu] = useState(false)
+    const [isValue, setIsValue] = useState(0)
 
     const handleMenu = () => {
         setIsMenu(!isMenu)
+        setIsValue(isValue + 1)
+    }
+
+    const handleCategorySelect = (category) => {
+        onSelect(category)
+        setIsMenu(false)
     }
 
     return(
         <StyledCategory onClick={handleMenu}>
             <TextAndImage>
-                <Text>Selecione a categoria</Text>
+                <Text value={value}>{isValue > 0 ? value : "slecione a categoria"}</Text>
                 <Image width="20px" height="20px" src="/triangulo.png" alt="Ícone de categoria" />
             </TextAndImage>
-            {isMenu && <Menu/>}
+            {isMenu && <Menu handleCategorySelect={handleCategorySelect}/>}
         </StyledCategory>
     )
 }
