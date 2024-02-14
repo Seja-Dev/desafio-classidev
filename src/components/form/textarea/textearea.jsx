@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { forwardRef } from "react"
 
 const StyledTextarea = styled.textarea`
     background-color: #a4a4a4;
@@ -15,8 +16,10 @@ const StyledTextarea = styled.textarea`
     }
 `
 
-export default function Textarea() {
+ const Textarea = forwardRef(({ ...rest }, ref) => {
     return(
-        <StyledTextarea placeholder="Descrição"/>
+        <StyledTextarea placeholder="Descrição" {...rest} ref={ref}/>
     )
-}
+})
+
+export default Textarea
