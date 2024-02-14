@@ -15,6 +15,11 @@ const NavbarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px 55px;
+  @media ( max-width: 636px){
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+  }
 ;
 `
 const StyledLogout = styled.a`
