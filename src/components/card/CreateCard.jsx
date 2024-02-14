@@ -6,9 +6,12 @@ import axios from 'axios';
 import { useSWRConfig } from 'swr'
 import { useRouter } from "next/router";
 
+
+import { createCardSchema } from "../../../modules/card/card.schema";
+
 import Input from "../form/Input";
 import Button from "../form/Button";
-import { createCardSchema } from "../../../modules/card.schema";
+import Selecter from "../form/Selecter";
 
 const Container = styled.div`
   width: 100%;
@@ -42,10 +45,7 @@ const Form = styled.form`
 
 const InputAlt = styled(Input)`
   height: 126px;
-  ::placeholder{
-    align-items: flex-end;
-  }
-  
+  padding-bottom: 80px;
 `;
 
 const ButtonAlt = styled(Button)`
@@ -82,8 +82,7 @@ export default function CreateCard(){
             control={control} 
             type2 
           />
-          <Input 
-            placeholder='Selecione a categoria'
+          <Selecter 
             name='category'
             control={control}
             type2 
@@ -96,7 +95,7 @@ export default function CreateCard(){
           />
           <Input 
             placeholder='Whatsapp'
-            name='price'
+            name='whatsapp'
             control={control} 
             type2 
           />
