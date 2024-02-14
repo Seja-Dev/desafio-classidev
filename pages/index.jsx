@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import axios from 'axios';
+import { useForm } from "react-hook-form";
 import useSWR from 'swr';
 
 import Input from "../src/components/form/Input";
@@ -13,15 +14,17 @@ const Container = styled.div`
   background: ${(props) => props.theme.colors.background};
 `;
 
-const ContainerContent = styled.div`
+const ContainerCards = styled.div`
   display: grid;
   grid-template-columns: 350px 350px 350px;
   margin: 0 130px;
 `;
-
-const InputAlt = styled(Input)`
-  margin-top:  110px;
-`;
+const ContainerContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px ;
+`
 
 const fetcher = async (url) => {
   const response = await axios.get(url);
@@ -29,26 +32,36 @@ const fetcher = async (url) => {
 };
 
 export default function Home() {
-  const { data } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, fetcher);
+  const { control, handleSubmit, formState: { isValid }, reset } = useForm({
+    mode: 'all'
+  });
+  const { data,error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, fetcher);
 
-  // if (error) return <div>Erro ao carregar os dados</div>;
-  // if (!data) return <div>Carregando...</div>;
+   if (error) return <div>Erro ao carregar os dados</div>;
+   if (!data) return <div>Carregando...</div>;
 
   return (
     <Container>
       <NavBar type1 />
       <ContainerContent>
-        {/* <InputAlt type1 /> */}
-        {data?.map((card,index) => (
-          <Card
-            key={card._id[index]}
-            title={card.title}
-            date={card.createdDate}
-            price={card.price}
-            description={card.description}
-            category={card.category}
-          />
-        ))}
+            <Input
+              name='title'
+              control={control}   
+            /> 
+            <ContainerCards>       
+              {data?.map((card) => (
+                <Card
+                  key={card._id}
+                  title={card.title}
+                  date={card.createdDate}
+                  price={card.price}
+                  description={card.description}
+                  category={card.category}
+                  id={card._id}
+                  type1
+                />
+              ))}
+            </ContainerCards>
       </ContainerContent>
       <Footer />
     </Container>

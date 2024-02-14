@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { useState } from "react"
 import moment from 'moment'
-import axios from 'axios'
-import { useSWRConfig } from "swr"
+
 import { useRouter } from "next/router";
+
 
 const CardContainer = styled.div`
   display: flex;
@@ -73,22 +72,25 @@ const CategoryImg = styled.img`
   height: 20px;
 `
 
-export default function Card({title,date, price,description,category,id}){
+export default function Card({ title, date, price, description, category }){
   const router = useRouter()
 
   return(
-    <CardContainer>
-        <StyledCard onClick={() => router.push('/reviewAnnouncement')} >
-            <Title>{title}</Title>
-            <DatePosted>{moment(date).format('LLL')}</DatePosted>
-            <Price>{price}</Price>
-            <Description>{description}</Description>
-            <CategoryContainer>
-                <CategoryImg src='/car.png'/>
-                <CategoryName>{category}</CategoryName>
-            </CategoryContainer>
-        </StyledCard>
-    </CardContainer>
+        <CardContainer>
+            <StyledCard onClick={() => router.push('/reviewAnnouncement')} >
+                <Title>{title}</Title>
+                <DatePosted>{moment(date).format('LLL')}</DatePosted>
+                <Price>{price}</Price>
+                <Description>{description}</Description>
+                <CategoryContainer>
+                    <CategoryImg src='/car.png'/>
+                    <CategoryName>{category}</CategoryName>
+                </CategoryContainer>
+            </StyledCard>
+        </CardContainer>
+      
+  
+    
 
   )
 }

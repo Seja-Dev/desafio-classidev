@@ -14,14 +14,21 @@ const StyledButton = styled.button`
   left: 916px;
   border-radius: 10px;
   cursor: pointer;
+  ${props => !props.disabled && 'cursor: pointer;'} 
   color: #fff;
+  :disabled {
+    background-color : ${props => props.theme.colors.disabled};
+  }
   :hover {
     background-color: #ffa600c0;
   }
 `
-const Button = ({ children,loading, ...props }) => {
+const Button = ({ children,loading,disabled, ...props }) => {
     return ( 
-      <StyledButton {...props}>
+      <StyledButton 
+      disabled={disabled || loading}
+      {...props}
+      >
         {loading && <img src='./loader.png' width='15px' />}
         {!loading && children}
         </StyledButton>

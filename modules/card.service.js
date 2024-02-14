@@ -21,7 +21,7 @@ import Anuncio from './card.model'
       })
     }
     export const editCard = async (body, user) => {
-      return await Post.findOneAndUpdate({
+      return await Anuncio.findOneAndUpdate({
         _id: body.id,
     
       },{
@@ -30,7 +30,7 @@ import Anuncio from './card.model'
         description: body.description,
         category: body.category
       },{
-        new: true // mongoBD vai manda pra nós o documento ja atualizado
+        new: true
       })
     }
   
