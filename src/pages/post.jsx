@@ -9,7 +9,7 @@ import Container from "@/components/layout/container/container"
 import Date from "@/components/layout/date/date"
 import Class from "@/components/layout/class/class"
 import Footer from "@/components/footer/footer"
-import ConfirmDelete from "@/components/confirmDelete/confirmDelete"
+import ConfirmDelete from "../components/confirmDelete/confirmdelete"
 import EditForm from "@/components/form/editForm/editForm"
 
 const StyledDiv = styled.div`
