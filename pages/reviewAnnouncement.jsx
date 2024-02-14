@@ -20,6 +20,9 @@ const BacktoHomeContainer = styled.div`
   gap: 15px;
   cursor: pointer;
   margin: 50px 0 20px 150px;
+   @media ( max-width: 473px){
+    margin: 50px 0 20px 70px;
+  }
 `
 const TextLink = styled.h3`
   text-decoration: underline;

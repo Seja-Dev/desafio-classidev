@@ -12,11 +12,16 @@ const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 60px 150px;
+   @media ( max-width: 473px){
+    padding: 60px 100px;
+  }
 `
 const TilteContainer = styled.div`
   display: flex;
   gap: 20px;
-  align-items: end;
+  @media ( max-width: 498px){
+  flex-direction: column;
+  }
 `
 const Title1 = styled.h3`
   font-size: 48px;
@@ -45,6 +50,7 @@ const TextDelete = styled(TextEdit)`
 `
 const StyledFlex = styled.div`
   display: flex;
+  align-items: end;
   margin-bottom: 13px;
 `
 const CategoryContainer1 = styled.div`
