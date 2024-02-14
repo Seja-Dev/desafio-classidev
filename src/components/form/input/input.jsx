@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { forwardRef } from "react"
+import React from "react"
 
 const StyledInput = styled.input`
     width: 450px;
@@ -10,14 +10,16 @@ const StyledInput = styled.input`
     padding: 8px 20px;
     font-size: 15px;
 
-    &::placeholder{
+    &::placeholder {
         color: black;
         font-weight: bolder;
     }
 `
 
-const Input = forwardRef(({ placeholder, ...rest }, ref) => {
+const Input = React.forwardRef(function Input({ placeholder, ...rest }, ref) {
     return <StyledInput ref={ref} placeholder={placeholder} {...rest} />
 })
+
+Input.displayName = 'Input'
 
 export default Input

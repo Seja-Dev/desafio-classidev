@@ -16,7 +16,7 @@ const StyledTextarea = styled.textarea`
     }
 `
 
- const Textarea = forwardRef(({ ...rest }, ref) => {
+const Textarea = forwardRef(function Textarea({ ...rest }, ref) {
     return(
         <StyledTextarea {...rest} ref={ref}/>
     )

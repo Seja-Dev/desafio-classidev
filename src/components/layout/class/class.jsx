@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Image from "next/image"
 
 const ClassContainer = styled.div`
     display: flex;
@@ -17,8 +18,8 @@ export default function Class({ category, white }) {
         <ClassContainer>
             {
                 white ? 
-                <img src={category + "White.png"}/> :
-                <img src={category + ".png"}/> 
+                <Image width="20px" height="20px" alt="categoria branca" src={"/" + category + "White.png"}/> :
+                <Image width="20px" height="20px" alt="categoria" src={"/" + category + ".png"}/> 
             }
             <Text white={white}>{category}</Text>
         </ClassContainer>

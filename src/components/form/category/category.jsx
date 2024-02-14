@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { useState } from "react"
+import Image from "next/image"
 
 import Menu from "./menu"
 
@@ -39,7 +40,7 @@ export default function Category() {
         <StyledCategory onClick={handleMenu}>
             <TextAndImage>
                 <Text>Selecione a categoria</Text>
-                <img src="triangulo.png" width="20px" height="20px"/>
+                <Image width="20px" height="20px" src="/triangulo.png" alt="Ícone de categoria" />
             </TextAndImage>
             {isMenu && <Menu/>}
         </StyledCategory>

@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useRouter } from "next/router"
 import axios from "axios"
 import { useState } from "react"
+import Image from "next/image"
 
 import Navbar from "@/components/navbar/navbar"
 import Back from "@/components/layout/back/back"
@@ -119,7 +120,7 @@ export default function Post() {
                 <ProductContainer>
                     <Product>{product}</Product>
                     <DeleteOrEdit onClick={handleEdit}>
-                        <img src="edit.png" width="15px" height="15px"/>
+                        <Image alt="imagem dpara edit" src="/edit.png" width="15px" height="15px"/>
                         <p>Editar</p>
                     </DeleteOrEdit>
                     { isEdit && 
@@ -133,7 +134,7 @@ export default function Post() {
                     }
 
                     <DeleteOrEdit onClick={handleDeleteConfirm} deleted>
-                        <img src="delete.png" width="15px" height="15px"/>
+                        <Image alt="imagem dara delete" src="/delete.png" width="15px" height="15px"/>
                         <p>Deletar</p>
                     </DeleteOrEdit>
                 </ProductContainer>
@@ -153,7 +154,7 @@ export default function Post() {
                     <Description>{initialDescription}</Description>
                     <Notice>Gostou? Entre em contato</Notice>
                     <ContactContainer>
-                        <img src="telefone.png"/>
+                        <Image width="20px" height="20px" alt="imagem de telefone" src="/telefone.png"/>
                         <Contact>{initialWhatsapp} </Contact>
                     </ContactContainer>
                 </InfoContainer>
