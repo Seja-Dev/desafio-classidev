@@ -10,6 +10,7 @@ import Date from "@/components/layout/date/date"
 import Class from "@/components/layout/class/class"
 import Footer from "@/components/footer/footer"
 import ConfirmDelete from "@/components/confirmDelete/confirmDelete"
+import EditForm from "@/components/form/editForm/editForm"
 
 const StyledDiv = styled.div`
     min-height: 100vh;
@@ -81,21 +82,33 @@ const Contact = styled.h3`
 
 export default function Post() {
     const router = useRouter()
-    const { category, product, price, description, whatsapp, _id } = router.query
+    const { 
+        category,
+        product, 
+        price: initialPrice,
+        description: initialDescription, 
+        whatsapp: initialWhatsapp, 
+        _id 
+    } = router.query
     const [ isDeleteConfirm, setIsDeleteConfirm ] = useState(false)
+    const [ isEdit, setIsEdit ] = useState(false)
 
     const handleDelete = async () => {
         try {
-            const response = await axios.delete(`https://api-products-nine.vercel.app/products/${_id}`);
-            console.log('Produto excluído com sucesso:', response.data);
-            router.push('/');
+            const response = await axios.delete(`https://api-products-nine.vercel.app/products/${_id}`)
+            console.log('Produto excluído com sucesso:', response.data)
+            router.push('/')
         } catch (error) {
-            console.error('Erro ao excluir produto:', error);
+            console.error('Erro ao excluir produto:', error)
         }
     }
 
-    const handleConfirm = () => {
+    const handleDeleteConfirm = () => {
         setIsDeleteConfirm(!isDeleteConfirm)
+    }
+
+    const handleEdit = () => {
+        setIsEdit(!isEdit)
     }
 
     return(
@@ -105,12 +118,21 @@ export default function Post() {
                 <Back/>
                 <ProductContainer>
                     <Product>{product}</Product>
-                    <DeleteOrEdit>
+                    <DeleteOrEdit onClick={handleEdit}>
                         <img src="edit.png" width="15px" height="15px"/>
                         <p>Editar</p>
                     </DeleteOrEdit>
+                    { isEdit && 
+                        <EditForm
+                        productId={_id}
+                        initialPrice={initialPrice}
+                        initialDescription={initialDescription}
+                        initialWhatsapp={initialWhatsapp}
+                        onClick={handleEdit}
+                    />
+                    }
 
-                    <DeleteOrEdit onClick={handleConfirm} deleted>
+                    <DeleteOrEdit onClick={handleDeleteConfirm} deleted>
                         <img src="delete.png" width="15px" height="15px"/>
                         <p>Deletar</p>
                     </DeleteOrEdit>
@@ -118,7 +140,7 @@ export default function Post() {
                 { isDeleteConfirm && 
                     <ConfirmDelete
                         onClick={handleDelete}
-                        cancelOnclick={handleConfirm}
+                        cancelOnclick={handleDeleteConfirm}
                     />
                 }
                 <InfoContainer>
@@ -127,12 +149,12 @@ export default function Post() {
                         white
                     />
                     <Date white>22/02/2022</Date>
-                    <Price> R$ {price}</Price>
-                    <Description>{description}</Description>
+                    <Price> R$ {initialPrice}</Price>
+                    <Description>{initialDescription}</Description>
                     <Notice>Gostou? Entre em contato</Notice>
                     <ContactContainer>
                         <img src="telefone.png"/>
-                        <Contact>{whatsapp} </Contact>
+                        <Contact>{initialWhatsapp} </Contact>
                     </ContactContainer>
                 </InfoContainer>
             </Container>

@@ -18,7 +18,7 @@ const StyledTextarea = styled.textarea`
 
  const Textarea = forwardRef(({ ...rest }, ref) => {
     return(
-        <StyledTextarea placeholder="Descrição" {...rest} ref={ref}/>
+        <StyledTextarea {...rest} ref={ref}/>
     )
 })
 
