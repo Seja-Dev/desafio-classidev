@@ -2,7 +2,7 @@
 
 ## Description
 
-Projeto desenvolvido inteiramente por mim. Sua finalidade é o postar, apresentar, atualizar e deletar produtos(crud) que estejam a venda. O projeto esta separado em dois repositórios, esse que é o frontend, e o [repositório do backend](https://github.com/iagoPinheiro1401/api-products).
+Project developed entirely by me. Its purpose is to post, present, update and delete products (crud) that are for sale. The project is separated into two repositories, this one is the frontend, and the [repositório do backend](https://github.com/iagoPinheiro1401/api-products).
 
 ##Project Structure
 
@@ -33,9 +33,9 @@ Projeto desenvolvido inteiramente por mim. Sua finalidade é o postar, apresenta
     - Or if you wish, the project was deployed: https://desafio-classidev.vercel.app/
 
 ## prototypes
--Page to present all products for sale
+- Page to present all products for sale
 ![prototipo](/public/prototipo.png)
--page to advertise product for sale
+- Page to advertise product for sale
 ![prototipo](/public/prototipoCreate.png)
-page with information on a specific product
+- Page with information on a specific product
 ![prototipo](/public/prototipoProduct.png)
