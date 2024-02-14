@@ -14,6 +14,11 @@ const StyledClass = styled.div`
     gap: 29px;
     padding: 0 24px;
     cursor: pointer;
+
+    @media (max-width: 400px) {
+        max-width: 290px;
+        height: 275px;
+    } 
 `
 
 const ProductsAndDate = styled.div`

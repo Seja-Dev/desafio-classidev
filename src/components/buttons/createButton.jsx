@@ -10,6 +10,12 @@ const StyledButton = styled.button`
     border-radius: 10px;
     border: none;
     cursor: pointer;
+
+    @media (max-width: 650px) {
+        max-width: 100px;
+        padding: 5px 5px;
+        margin-right: 10px;
+    }
 `
 
 const StyledLink = styled(Link)`

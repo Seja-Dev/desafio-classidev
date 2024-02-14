@@ -13,6 +13,11 @@ const ContainerSearch = styled.div`
   gap: 20px;
   padding-right: 20px;
   border-radius: 10px;
+
+  @media (max-width: 900px) {
+    max-width: 350px;
+    gap: 10px;
+  }
 `
 
 const Input = styled.input`
@@ -31,6 +36,10 @@ const Input = styled.input`
   &::placeholder {
     color: black;
     font-size: 20px;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 200px;
   }
 `
 

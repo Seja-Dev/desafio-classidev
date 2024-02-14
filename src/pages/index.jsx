@@ -21,6 +21,10 @@ const SearchContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin: 150px 0;
+
+  @media (max-width: 900px) {
+    margin: 90px 0;
+  }
 `
 
 const ClassefieldsContainer = styled.div`
@@ -30,6 +34,17 @@ const ClassefieldsContainer = styled.div`
   justify-content: center;
   margin-left: 40px;
   margin-bottom: 150px;
+
+  @media (max-width: 1240px) {
+    grid-template-columns: repeat(2, 900fr);
+  }
+
+  @media (max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
 `
 
 function HomePage() {
