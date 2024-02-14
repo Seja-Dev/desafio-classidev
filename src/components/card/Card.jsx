@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import moment from 'moment'
 
-import { useRouter } from "next/router";
 
 
 const CardContainer = styled.div`
@@ -20,11 +19,6 @@ const StyledCard = styled.div`
   border-radius: 10px;
   background: rgba(217, 217, 217, 1);
   padding: 25px;
-  :hover{
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    transform: scale(1.1);
-  }
 `
 const Title = styled.h2`
   font-size: 39px;
@@ -78,11 +72,9 @@ const HeaderContainer = styled.div`
 `
 
 export default function Card({ title, date, price, description, category }){
-  const router = useRouter()
-
   return(
         <CardContainer>
-            <StyledCard onClick={() => router.push('/reviewAnnouncement')}>
+            <StyledCard >
                 <HeaderContainer>
                     <Title>{title}</Title>
                     <DatePosted>{moment(date).format('LLL')}</DatePosted>

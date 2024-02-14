@@ -9,8 +9,6 @@ import { ironConfig } from "../../../lib/middlewares/ironSession"
 import { loginSchema } from '../../../modules/user/user.schema'
 
 
-
-
 const handler = createHandler()
 
 handler.post(validation({body : loginSchema}), async (req, res)=> {

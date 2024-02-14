@@ -110,7 +110,7 @@ const TextContact = styled.h2`
 
 
 
-export default function Review({ title, date, category, price, description, whatsapp, id }){
+export default function Review({ title, date, category, price, description, whatsapp, id, isOwner }){
   const { mutate } = useSWRConfig()
   const [editCard , setEditCard] = useState(false)
   const handleEdit = async () => {
@@ -141,13 +141,13 @@ export default function Review({ title, date, category, price, description, what
                   {!editCard && title}
                 </Title1>
                 <StyledFlex>
-                    <EditImg src='/edit.png'/>
-                    <TextEdit onClick={handleEdit}>{editCard ? '-' : 'Editar'}</TextEdit>
-                </StyledFlex>
-                <StyledFlex>
-                    <TrashImg src='/trash.png' />
-                    <TextDelete onClick={handleDelete}>{editCard ? '-' : 'Deletar'}</TextDelete>
-                </StyledFlex>
+                      <EditImg src='/edit.png'/>
+                      <TextEdit onClick={handleEdit}>{editCard ? '-' : 'Editar'}</TextEdit>
+                  </StyledFlex>
+                  <StyledFlex>
+                      <TrashImg src='/trash.png' />
+                      <TextDelete onClick={handleDelete}>{editCard ? '-' : 'Deletar'}</TextDelete>
+                  </StyledFlex>
             </TilteContainer>
             <CategoryContainer1>
               <CategoryImg1 src='/car-white.png' />

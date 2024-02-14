@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import User from '../user/user.model'
 
 const AnuncioSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -6,7 +7,8 @@ const AnuncioSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   whatsapp : { type: Number, required: true }, 
   description: { type: String, required: true },
-  category: { type: String, required: true }
+  category: { type: String, required: true },
+  creator: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' }
 });
 
 

@@ -54,7 +54,7 @@ const ButtonAlt = styled(Button)`
 
 export default function CreateCard(){
   const router = useRouter()
-  const { control, handleSubmit, formState: { isValid }, reset } = useForm({
+  const { control, handleSubmit, formState: { isValid }, reset,setError } = useForm({
     resolver: joiResolver(createCardSchema),
     mode: 'all'
   });
@@ -64,13 +64,22 @@ export default function CreateCard(){
   const onSubmit =  async (data) => {
     setLoading(true)
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, data)
-    if (response.status === 201) {
-      reset()
-      mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/card`)
-      setLoading(false)
-      router.push('/')
-    } 
-  } 
+   try{
+      if (response.status === 201) {
+        reset()
+        mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/card`)
+        setLoading(false)
+        router.push('/')
+    }
+    } catch ({ response }) {
+        if ( response.data) {
+            setError('price',{
+              message : 'Essa área nao aceita pontuação'
+              
+            })
+        }
+      }} 
+   
   return (
     <Container>
       <Title>Crie seu anúncio </Title>
@@ -85,7 +94,7 @@ export default function CreateCard(){
           <Selecter 
             name='category'
             control={control}
-            type2 
+            type1 
           />
           <Input 
             placeholder='Preço'

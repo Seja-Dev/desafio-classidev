@@ -7,7 +7,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 90px;
+  position: static;
+  bottom: 0;
 ;
 `
 const Text = styled.h3`

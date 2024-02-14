@@ -5,9 +5,7 @@ import { useRouter } from "next/router"
 import Logo from "../logo/Logo";
 import Button from "../form/Button";
 
-const ContainerBox = styled.div`
-
-`;
+const ContainerBox = styled.div``
 
 const NavbarContainer = styled.div`
   height: 116px;

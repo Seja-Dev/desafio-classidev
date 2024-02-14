@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import axios from 'axios';
-import { useState } from "react";
+import {  useState } from "react";
 import { useForm } from "react-hook-form";
 import useSWR from 'swr';
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { withIronSessionSsr } from 'iron-session/next'
+
+import { ironConfig }  from '../lib/middlewares/ironSession'
 
 import Input from "../src/components/form/Input";
 import NavBar from "../src/components/navbar/NavBar";
@@ -38,6 +43,9 @@ const InputsContainer = styled.div`
   background-color: ${props => props.theme.colors.inputBackground}; 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
+const FooterAlt = styled(Footer)`
+  margin-top: 270px;
+`
 
 const fetcher = async (url) => {
   const response = await axios.get(url);
@@ -55,15 +63,17 @@ export default function Home() {
   if (error) return <div>Erro ao carregar os dados</div>;
   if (!data) return <div>Carregando...</div>;
 
+
   const lowerSearch = searchCard.toLowerCase()
   const filterData = data.filter((card) => 
     card.title.toLowerCase().includes(lowerSearch)
   );
+
   return (
     <Container>
       <NavBar type1 />
       <ContainerContent>
-        <InputsContainer>
+        <InputsContainer>       
           <Input
             name='title'
             control={control}
@@ -76,9 +86,17 @@ export default function Home() {
            type2 
            /> 
         </InputsContainer>
-       
+        <Link 
+        style={{color: 'white',fontSize: '17px', margin: '25px '}}
+         href='/reviewAnnouncement'
+        > 
+        {filterData.length === 0 ?('') : ('Veja mais sobre os anúncios')}
+        </Link>
         <ContainerCards>       
-          {filterData?.map((card) => (
+        {filterData.length === 0 ? (
+        <h1 style={{color:'white'}}>Nenhum anúncio encontrado</h1>
+        ) : (
+          filterData.map((card) => (
             <Card
               key={card._id}
               title={card.title}
@@ -87,11 +105,35 @@ export default function Home() {
               description={card.description}
               category={card.category}
               id={card._id}
-            />
-          ))}
+            />     
+          ))
+        )}             
         </ContainerCards>
+        
       </ContainerContent>
-      <Footer />
+      <FooterAlt />
     </Container>
   );
 }
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const user = req.session.user
+   
+    if (!user) {
+      return {
+        redirect : {
+          permanent: false,
+          destination: '/login'
+        }
+
+      }
+    }
+
+    return {
+      props: {
+        user
+      }
+    }
+  },
+  ironConfig
+)

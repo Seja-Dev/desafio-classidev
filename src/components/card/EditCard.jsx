@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import axios from 'axios'
 
-import Input from '../form/Input'
-import { createCardSchema, editCardSchema } from '../../../modules/card/card.schema'
+import { createCardSchema } from '../../../modules/card/card.schema'
+
 import Button from '../form/Button'
+import Input from '../form/Input'
 
 const InputAlt = styled(Input)`
   height: 126px;

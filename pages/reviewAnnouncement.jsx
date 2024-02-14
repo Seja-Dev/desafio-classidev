@@ -32,7 +32,7 @@ const ArrowImg = styled.img`
   height: 16px;
 `
 
-export default function reviewAnnouncementPage (){
+export default function reviewAnnouncementPage ({user}){
   const router = useRouter()
   const fetcher = async (url) => {
     const response = await axios.get(url);

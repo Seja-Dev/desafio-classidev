@@ -8,8 +8,6 @@ import { signupSchema } from '../../../modules/user/user.schema'
 import { ironConfig } from "../../../lib/middlewares/ironSession"
 
 
-
-
 const signup = createHandler()
 
 signup.post(validation( {body: signupSchema } ),async (req,res) => {  
