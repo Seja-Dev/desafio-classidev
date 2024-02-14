@@ -8,6 +8,7 @@ import Anuncio from './card.model'
       price: body.price,
       createdDate: new Date(),
       description: body.description,
+      whatsapp: body.whatsapp,
       category: body.category
     })}
     export const getCards = async (limit = 10) => {
@@ -28,6 +29,7 @@ import Anuncio from './card.model'
         title: body.title,
         price: body.price,
         description: body.description,
+        whatsapp: body.whatsapp,
         category: body.category
       },{
         new: true

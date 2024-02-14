@@ -1,6 +1,7 @@
 import createHandler from '../../../lib/middlewares/nextConnect'
-import { createCard, getCards, deleteCard, editCard } from '../../../modules/card.service'; 
- import { createCardSchema, deleteCardSchema, editCardSchema } from '../../../modules/card.schema';
+
+import { createCard, getCards, deleteCard, editCard } from '../../../modules/card/card.service'; 
+ import { createCardSchema, deleteCardSchema, editCardSchema } from '../../../modules/card/card.schema';
 import validation from '../../../lib/middlewares/validation';
 
 const router = createHandler();

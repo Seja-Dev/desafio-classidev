@@ -13,23 +13,6 @@ const ReviewContainer = styled.div`
   flex-direction: column;
   padding: 60px 150px;
 `
-const BacktoHomeContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  cursor: pointer;
-  margin-bottom: 45px;
-`
-const TextLink = styled.h3`
-  text-decoration: underline;
-  color: ${(props) => props.theme.colors.white};
-  font-size: 16px;
-  font-weight: 400;
-`
-const ArrowImg = styled.img`
-  width: 16px;
-  height: 16px;
-`
 const TilteContainer = styled.div`
   display: flex;
   gap: 20px;
@@ -127,8 +110,7 @@ const TextContact = styled.h2`
 
 
 
-export default function Review({ title, date, category, price, description, id }){
-  const router = useRouter()
+export default function Review({ title, date, category, price, description, whatsapp, id }){
   const { mutate } = useSWRConfig()
   const [editCard , setEditCard] = useState(false)
   const handleEdit = async () => {
@@ -153,11 +135,7 @@ export default function Review({ title, date, category, price, description, id }
   }
 
   return(
-    <ReviewContainer>
-            <BacktoHomeContainer>
-                <ArrowImg src='/arrow-left.png' />
-                <TextLink onClick={() => router.push('/')}>Voltar para a página inicial</TextLink>
-            </BacktoHomeContainer>
+    <ReviewContainer>         
             <TilteContainer>
                 <Title1>
                   {!editCard && title}
@@ -178,29 +156,25 @@ export default function Review({ title, date, category, price, description, id }
               </CategoryName1>
             </CategoryContainer1>
             <DatePosted1>Postado {moment(date).format('LLL')}</DatePosted1>
-            <Price1>
-              {!editCard && price}
-            </Price1>
+            <Price1>R${!editCard && price}</Price1>
             <DescriptionContainer>
-                <Description1> 
-                  {!editCard && description}
-                
-              </Description1>
+                <Description1>{!editCard && description}</Description1>
             </DescriptionContainer>
             {editCard && 
                   <EditCard 
-                  id={id} 
-                  description={description}
-                  title={title}
-                  category={category}
-                  price={price}
-                  onSave={handleSaveEdit}  
-                />      
+                    id={id} 
+                    description={description}
+                    title={title}
+                    category={category}
+                    price={price}
+                    whatsapp={whatsapp}
+                    onSave={handleSaveEdit}  
+                  />      
             }                   
             <TextContact>Gostou? Entre em contato</TextContact>
             <ContactContainer>
               <PhoneImg src='/phone.png'/>
-              <Number>(11) 98765-4321</Number>
+              <Number>{!editCard && '(+55) ' + whatsapp}</Number>
             </ContactContainer>     
       </ReviewContainer>
   )

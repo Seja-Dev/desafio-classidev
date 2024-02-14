@@ -8,10 +8,9 @@ const ContainerBox = styled.div`
 `
 const StyledInputContainer = styled.div`
   display: flex;
-  align-items: center;
   gap: 10px;
-  color:  ${(props)  => props.theme.colors.textColor};
-  padding: 15px 20px;
+  color: ${(props)  => props.theme.colors.textColor};
+  padding: 12px 20px;
   width: 504px;
   height: 46px;
   border-radius: 10px;

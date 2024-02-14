@@ -4,7 +4,7 @@ import { joiResolver } from '@hookform/resolvers/joi'
 import axios from 'axios'
 
 import Input from '../form/Input'
-import { createCardSchema, editCardSchema } from '../../../modules/card.schema'
+import { createCardSchema, editCardSchema } from '../../../modules/card/card.schema'
 import Button from '../form/Button'
 
 const InputAlt = styled(Input)`
@@ -14,7 +14,7 @@ const InputAlt = styled(Input)`
   }
   
 `;
-const EditCard= ({ id, title,price, description,category, onSave }) => {
+const EditCard= ({ id, title, whatsapp, price, description, category, onSave }) => {
   const {control,handleSubmit, formState: { isValid } } = useForm({
     resolver: joiResolver(createCardSchema),
     mode: 'all'
@@ -28,6 +28,7 @@ const EditCard= ({ id, title,price, description,category, onSave }) => {
           title: data.title,
           price: data.price,
           description: data.description,
+          whatsapp: data.whatsapp,
           category: data.category
         } )
 
@@ -40,44 +41,45 @@ const EditCard= ({ id, title,price, description,category, onSave }) => {
     }
   }
   return (
-    <form onSubmit={handleSubmit(handleSaveEdit)} >
-      <Input 
-            placeholder='Nome do produto'
-            name="title"
-            control={control} 
-            defaultValue={title}
-            type2 
-          />
-          <Input 
-            placeholder='Selecione a categoria'
-            name='category'
-            control={control}
-            defaultValue={category}
-            type2 
-          />
-          <Input 
-            placeholder='Preço'
-            name='price'
-            control={control}
-            defaultValue={price}
-            type2 
-          />
-          <Input 
-            placeholder='Whatsapp'
-            name='price'
-            control={control}
-            defaultValue={price}
-            type2 
-          />
-          <InputAlt 
-            placeholder='Descrição'
-            name='description'
-            control={control}
-            defaultValue={description} 
-            type2 
-          />
-      <Button disabled={!isValid}>Salvar alterações </Button>
-    </form>
+          <form  onSubmit={handleSubmit(handleSaveEdit)}>
+                <Input 
+                  placeholder='Nome do produto'
+                  name="title"
+                  control={control} 
+                  defaultValue={title}
+                  type2 
+                />
+                <Input 
+                  placeholder='Selecione a categoria'
+                  name='category'
+                  control={control}
+                  defaultValue={category}
+                  type2 
+                />
+                <Input 
+                  placeholder='Preço'
+                  name='price'
+                  control={control}
+                  defaultValue={price}
+                  type2 
+                />
+                <Input 
+                  placeholder='Whatsapp'
+                  name='whatsapp'
+                  control={control}
+                  defaultValue={whatsapp}
+                  type2 
+                />
+                <InputAlt 
+                  placeholder='Descrição'
+                  name='description'
+                  control={control}
+                  defaultValue={description} 
+                  type2 
+                />
+                <Button disabled={!isValid}>Salvar alterações </Button>
+          </form>
+   
   )
 }
 export default EditCard

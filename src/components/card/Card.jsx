@@ -14,8 +14,9 @@ const CardContainer = styled.div`
 const StyledCard = styled.div`
   width: 334px;
   height: 313px;
-  top: 444px;
-  left: 473px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 10px;
   background: rgba(217, 217, 217, 1);
   padding: 25px;
@@ -44,7 +45,6 @@ const Price = styled.h4`
   font-weight: 700;
   line-height: 24px;
   text-align: left;
-  margin: 15px 0;
 `
 const Description = styled.p`
   font-size: 14px;
@@ -68,8 +68,13 @@ const CategoryName = styled.h2`
   text-align: left;
 `
 const CategoryImg = styled.img`
-  width: 20.98px;
+  width: 23.98px;
   height: 20px;
+`
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `
 
 export default function Card({ title, date, price, description, category }){
@@ -77,13 +82,22 @@ export default function Card({ title, date, price, description, category }){
 
   return(
         <CardContainer>
-            <StyledCard onClick={() => router.push('/reviewAnnouncement')} >
-                <Title>{title}</Title>
-                <DatePosted>{moment(date).format('LLL')}</DatePosted>
-                <Price>{price}</Price>
+            <StyledCard onClick={() => router.push('/reviewAnnouncement')}>
+                <HeaderContainer>
+                    <Title>{title}</Title>
+                    <DatePosted>{moment(date).format('LLL')}</DatePosted>
+                    <Price>{'R$ ' + price}</Price>             
+                </HeaderContainer>
                 <Description>{description}</Description>
                 <CategoryContainer>
-                    <CategoryImg src='/car.png'/>
+                    <CategoryImg 
+                    src={
+                      category === 'Roupas e acessórios' ? '/roupas.png':
+                      category === 'Eletrônicos' ? '/pc.png' :
+                      category === 'Carros'  ? '/car.png'
+                      : '' 
+                    }
+                    />
                     <CategoryName>{category}</CategoryName>
                 </CategoryContainer>
             </StyledCard>

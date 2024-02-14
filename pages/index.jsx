@@ -46,7 +46,8 @@ export default function Home() {
       <ContainerContent>
             <Input
               name='title'
-              control={control}   
+              control={control}
+              type1   
             /> 
             <ContainerCards>       
               {data?.map((card) => (
@@ -58,7 +59,6 @@ export default function Home() {
                   description={card.description}
                   category={card.category}
                   id={card._id}
-                  type1
                 />
               ))}
             </ContainerCards>
