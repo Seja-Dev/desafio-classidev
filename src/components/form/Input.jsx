@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { useController } from 'react-hook-form'
-import Selecter from "./Selecter";
 
 const ContainerBox = styled.div`
   width: auto;
@@ -24,6 +23,13 @@ const StyledInputContainerAlt = styled.div`
   align-items: center;
   gap: 10px;
 `
+const StyledInputContainerAlt1 = styled.div`
+ color: ${(props)  => props.theme.colors.textColor};
+ padding: 12px 20px;
+ width: 100%;
+`
+
+
 const StyledInput = styled.input`
   border: 0;
   outline: none;
@@ -32,42 +38,50 @@ const StyledInput = styled.input`
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
+  border: ${props => props.onError && `border: 2px solid ${props.theme.colors.error}`};
+    &:focus {
+    outline: none;
+  }
   ::placeholder {
     color: ${(props)  => props.theme.colors.textColor};
   }
 `
 const StyledInputAlt = styled(StyledInput)`
-
   ::placeholder {
     font-size: 18px;
     font-weight: 400;
   }
 `
+const StyledInputAlt1 = styled(StyledInput)`
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: ${props => props.theme.colors.inputBackground};
+`
 const Lupa = styled.img`
   width: 18px;
   height: 18px;
 `
+const StyledLabel = styled.p`
+  font-weight:bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: ${props => props.theme.colors.white};
+`
+const ErrorLabel = styled.span`
+  color: ${props => props.theme.colors.error};
+  font-weight: bold;
+  font-size: 14px;
 
-const SelectContainer = styled.div`
-  margin-left: 63px;
-  cursor: pointer;
 `
-const Text = styled.h3`
-  font-size: 15px;
-  color: ${(props)  => props.theme.textColor};
-  font-style: oblique;
-  font-weight: 400;
-`
-const ArrowDrop = styled.img`
-  width: 19px;
-  height: 19px;
-  right: 30%;
-  z-index: 100;
-  transform: translate(-52%);
-  //background-color: white;
-  position: absolute;
-`
- function Input( {type1, type2,placeholder, name , control, defaultValue='', ...props} ) {
+const errorMessage = {
+  'string.empty': 'Este campo é obrigatório.',
+  'string.email':'Por favor,digite um email válido.',
+  'duplicated' : 'Ja existe uma conta com esse valor. '
+}
+
+
+export default function Input( {type1, type2, type3, label, placeholder, name , control, defaultValue='', ...props} ) {
   const {
     field :{ value, onChange},
     fieldState : { error }
@@ -80,7 +94,7 @@ const ArrowDrop = styled.img`
             <Lupa src='/lupa.png' />
             <StyledInput
             placeholder="Digite o que procura"
-            error={error} {...props} value={value} onChange={onChange}
+            error={error}  value={value} onChange={onChange}
             />
         </StyledInputContainerAlt>
       }
@@ -92,10 +106,16 @@ const ArrowDrop = styled.img`
             />
         </StyledInputContainer>
       }
+      {type3 &&
+        <StyledInputContainerAlt1 {...props}>
+          <StyledLabel> {label}</StyledLabel>
+          <StyledInputAlt1 placeholder={label} error={error}  value={value} onChange={onChange} />
+          {error && <ErrorLabel > {errorMessage[error.type] || error.message}</ErrorLabel>}
+        </StyledInputContainerAlt1>
+      }
     </ContainerBox>
 
 
 
   )
 }
-export default Input
