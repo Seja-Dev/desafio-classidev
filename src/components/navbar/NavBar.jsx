@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import axios from 'axios'
 import { useRouter } from "next/router"
 
 import Logo from "../logo/Logo";
@@ -18,14 +19,27 @@ const NavbarContainer = styled.div`
   padding: 20px 55px;
 ;
 `
+const StyledLogout = styled.a`
+  cursor: pointer ;
+  font-size: 17px;
+  color: ${(props) => props.theme.colors.white};
+  :hover {
+    color: darkred;
+  }
+`
 export default function NavBar({ type1, type2 }){
   const router = useRouter()
+  const handlelogout = async () => {
+    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/logout`)
+    router.push('/login')
+  }
   return(
     <ContainerBox>
           {type1 &&
               <NavbarContainer>
                 <Logo />
                 <Button onClick={() => router.push("/createAnnouncement")}>Criar anúncio</Button>
+                <StyledLogout onClick={handlelogout}>Desconectar</StyledLogout>
               </NavbarContainer>
           }
           {type2 && 
