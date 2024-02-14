@@ -1,40 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pull Request
 
-## Getting Started
+## Description
 
-First, run the development server:
+Project developed entirely by me. Its purpose is to post, present, update and delete products (crud) that are for sale. The project is separated into two repositories, this one is the frontend, and the [repositório do backend](https://github.com/iagoPinheiro1401/api-products).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+##Project Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Frontend:** React (with Styled Components)
+- **Backend:** Node.js - located in the [backend]((https://github.com/iagoPinheiro1401/api-products))
+- **DataBase**: MongoDB
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Implemented Features
+  
+  - CRUD operations on the API.
+  - search for products by name and/or category
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Configuration Instructions
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. **Clone the Repository:**
+   - clone the repository with git clone or download the zip
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. **Install Dependencies:** 
+   - In the main directory, run `npm install`.
 
-## Learn More
+3. **Configure and Start project:**
+   -  After installing the dependencies, start the project locally, `npm run dev`
 
-To learn more about Next.js, take a look at the following resources:
+4. **Run Locally:**
+   - To test the project locally, open a tab with http://localhost:3000 in a browser of your choice.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Project deployment:**
+    - Or if you wish, the project was deployed: https://desafio-classidev.vercel.app/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## prototypes
+- Page to present all products for sale
+![prototipo](/public/prototipo.png)
+- Page to advertise product for sale
+![prototipo](/public/prototipoCreate.png)
+- Page with information on a specific product
+![prototipo](/public/prototipoProduct.png)
