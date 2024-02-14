@@ -7,6 +7,9 @@ import Footer from "@/components/footer/footer"
 
 const StyledDiv = styled.div`
   background: linear-gradient(to bottom, #424242 0%, #000000 100%);
+  display: flex;  
+  flex-direction: column;
+  min-height: 100vh;
 `
 
 const SearchContainer = styled.div`

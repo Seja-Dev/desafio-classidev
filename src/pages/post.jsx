@@ -8,7 +8,9 @@ import Class from "@/components/layout/class/class"
 import Footer from "@/components/footer/footer"
 
 const StyledDiv = styled.div`
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background: #0e0e0e;
 `
 
