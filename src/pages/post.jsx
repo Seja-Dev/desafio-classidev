@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { useRouter } from "next/router"
+import axios from "axios"
+import { useState } from "react"
 
 import Navbar from "@/components/navbar/navbar"
 import Back from "@/components/layout/back/back"
@@ -7,6 +9,7 @@ import Container from "@/components/layout/container/container"
 import Date from "@/components/layout/date/date"
 import Class from "@/components/layout/class/class"
 import Footer from "@/components/footer/footer"
+import ConfirmDelete from "@/components/confirmDelete/confirmDelete"
 
 const StyledDiv = styled.div`
     min-height: 100vh;
@@ -78,7 +81,22 @@ const Contact = styled.h3`
 
 export default function Post() {
     const router = useRouter()
-    const { category, product, price, description, whatsapp } = router.query
+    const { category, product, price, description, whatsapp, _id } = router.query
+    const [ isDeleteConfirm, setIsDeleteConfirm ] = useState(false)
+
+    const handleDelete = async () => {
+        try {
+            const response = await axios.delete(`https://api-products-nine.vercel.app/products/${_id}`);
+            console.log('Produto excluído com sucesso:', response.data);
+            router.push('/');
+        } catch (error) {
+            console.error('Erro ao excluir produto:', error);
+        }
+    }
+
+    const handleConfirm = () => {
+        setIsDeleteConfirm(!isDeleteConfirm)
+    }
 
     return(
         <StyledDiv>
@@ -92,11 +110,17 @@ export default function Post() {
                         <p>Editar</p>
                     </DeleteOrEdit>
 
-                    <DeleteOrEdit deleted>
+                    <DeleteOrEdit onClick={handleConfirm} deleted>
                         <img src="delete.png" width="15px" height="15px"/>
                         <p>Deletar</p>
                     </DeleteOrEdit>
                 </ProductContainer>
+                { isDeleteConfirm && 
+                    <ConfirmDelete
+                        onClick={handleDelete}
+                        cancelOnclick={handleConfirm}
+                    />
+                }
                 <InfoContainer>
                     <Class
                         category={category}
