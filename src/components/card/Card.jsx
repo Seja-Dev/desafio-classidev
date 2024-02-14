@@ -19,6 +19,10 @@ const StyledCard = styled.div`
   border-radius: 10px;
   background: rgba(217, 217, 217, 1);
   padding: 25px;
+  @media ( max-width: 375px){
+    width: 270px;
+    height: 295px;
+  }
 `
 const Title = styled.h2`
   font-size: 39px;

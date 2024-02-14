@@ -25,6 +25,10 @@ const ContainerCards = styled.div`
   display: grid;
   grid-template-columns: 350px 350px 350px;
   margin: 0 130px;
+  @media (max-width: 1150px){
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 const ContainerContent = styled.div`
   display: flex;
@@ -42,6 +46,12 @@ const InputsContainer = styled.div`
   border-radius: 10px;
   background-color: ${props => props.theme.colors.inputBackground}; 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+   @media ( max-width: 636px){
+    width: 300px;
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+  }
 `
 const FooterAlt = styled(Footer)`
   margin-top: 270px;
