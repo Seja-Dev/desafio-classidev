@@ -36,6 +36,7 @@ function HomePage() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("")
   const router = useRouter()
 
   useEffect(() => {
@@ -52,8 +53,8 @@ function HomePage() {
   }, [])
 
   useEffect(() => {
-    setFilteredProducts(products.filter(product => product.product.toLowerCase().includes(searchTerm.toLowerCase())))
-  }, [searchTerm, products])
+    setFilteredProducts(products.filter(product => product.product.toLowerCase().includes(searchTerm.toLowerCase()) && (selectedCategory === "" || product.category === selectedCategory)))
+  }, [searchTerm, selectedCategory, products])
 
   const handleProductClick = (product) => {
     router.push({
@@ -66,7 +67,7 @@ function HomePage() {
     <StyledDiv>
       <Navbar button />
       <SearchContainer>
-        <Search setSearchTerm={setSearchTerm} />
+      <Search setSearchTerm={setSearchTerm} setSelectedCategory={setSelectedCategory} />
       </SearchContainer>
       <ClassefieldsContainer>
         {filteredProducts.map((product) => (

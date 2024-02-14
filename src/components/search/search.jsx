@@ -1,6 +1,8 @@
 import { useState } from "react"
 import styled from "styled-components"
 
+import Menu from "../form/category/menu"
+
 const ContainerSearch = styled.div`
   background-color: #a4a4a4;
   width: 704px;
@@ -43,13 +45,23 @@ const Img = styled.img`
   cursor: pointer;
 `
 
-const Search = ({ setSearchTerm }) => {
+const Search = ({ setSearchTerm, setSelectedCategory }) => {
   const [searchValue, setSearchValue] = useState("")
+  const [isMenuVisible, setIsMenuVisible] = useState(false)
 
   const handleInputChange = (event) => {
     const value = event.target.value
     setSearchValue(value)
     setSearchTerm(value)
+  }
+
+  const toggleMenu = () => {
+    setIsMenuVisible(!isMenuVisible)
+  }
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category === "Todos" ? "" : category)
+    setIsMenuVisible(false)
   }
 
   return (
@@ -61,7 +73,10 @@ const Search = ({ setSearchTerm }) => {
       />
       <Line />
       <h4>Todas as categorias</h4>
-      <Img width="20px" src="triangulo.png" />
+      <Img width="20px" src="triangulo.png" onClick={toggleMenu} />
+      {isMenuVisible && (
+        <Menu search handleCategorySelect={handleCategorySelect} />
+      )}
     </ContainerSearch>
   )
 }

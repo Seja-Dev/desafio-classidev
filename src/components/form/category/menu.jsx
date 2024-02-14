@@ -19,13 +19,28 @@ const Options = styled.div`
     }
 `
 
-export default function Menu() {
+export default function Menu({ handleCategorySelect, search }) {
+    const categoriesSearch = ["Todos", "carros", "eletrônicos", "roupas"]
+    const categoriesInput = ["carros", "eletrônicos", "roupas"]
+
+    const handleClick = (category) => {
+        handleCategorySelect(category);
+    }
+
     return(
         <StyledMenu>
-            <Options>Carros</Options>
-            <Options>Carros</Options>
-            <Options>Carros</Options>
-            <Options>Carros</Options>
+            { search ? 
+                categoriesSearch.map((category, index) => (
+                    <Options key={index} onClick={() => handleClick(category)}>
+                    {category}
+                    </Options>
+                )) : 
+                categoriesInput.map((category, index) => (
+                    <Options key={index} onClick={() => handleClick(category)}>
+                    {category}
+                    </Options>
+                ))
+            }
         </StyledMenu>
     )
 }
