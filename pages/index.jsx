@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import axios from 'axios';
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useSWR from 'swr';
 
@@ -7,6 +8,7 @@ import Input from "../src/components/form/Input";
 import NavBar from "../src/components/navbar/NavBar";
 import Card from "../src/components/card/Card";
 import Footer from "../src/components/footer/Footer";
+import Selecter from "../src/components/form/Selecter";
 
 const Container = styled.div`
   width: 100%;
@@ -25,6 +27,17 @@ const ContainerContent = styled.div`
   align-items: center;
   padding-top: 70px ;
 `
+const InputsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  width: 504px;
+  height: 46px;
+  border-radius: 10px;
+  background-color: ${props => props.theme.colors.inputBackground}; 
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`
 
 const fetcher = async (url) => {
   const response = await axios.get(url);
@@ -32,36 +45,51 @@ const fetcher = async (url) => {
 };
 
 export default function Home() {
-  const { control, handleSubmit, formState: { isValid }, reset } = useForm({
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, fetcher);
+  const { control } = useForm({
     mode: 'all'
   });
-  const { data,error } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/card`, fetcher);
 
-   if (error) return <div>Erro ao carregar os dados</div>;
-   if (!data) return <div>Carregando...</div>;
+  const [searchCard, setSearchCard] = useState('');
 
+  if (error) return <div>Erro ao carregar os dados</div>;
+  if (!data) return <div>Carregando...</div>;
+
+  const lowerSearch = searchCard.toLowerCase()
+  const filterData = data.filter((card) => 
+    card.title.toLowerCase().includes(lowerSearch)
+  );
   return (
     <Container>
       <NavBar type1 />
       <ContainerContent>
-            <Input
-              name='title'
-              control={control}
-              type1   
-            /> 
-            <ContainerCards>       
-              {data?.map((card) => (
-                <Card
-                  key={card._id}
-                  title={card.title}
-                  date={card.createdDate}
-                  price={card.price}
-                  description={card.description}
-                  category={card.category}
-                  id={card._id}
-                />
-              ))}
-            </ContainerCards>
+        <InputsContainer>
+          <Input
+            name='title'
+            control={control}
+            onChange={(e) => setSearchCard(e.target.value)}
+            type1   
+          /> 
+          <Selecter 
+           name='price' 
+           control={control}
+           type2 
+           /> 
+        </InputsContainer>
+       
+        <ContainerCards>       
+          {filterData?.map((card) => (
+            <Card
+              key={card._id}
+              title={card.title}
+              date={card.createdDate}
+              price={card.price}
+              description={card.description}
+              category={card.category}
+              id={card._id}
+            />
+          ))}
+        </ContainerCards>
       </ContainerContent>
       <Footer />
     </Container>
