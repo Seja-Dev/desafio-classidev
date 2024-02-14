@@ -14,6 +14,11 @@ const StyledInput = styled.input`
         color: black;
         font-weight: bolder;
     }
+
+    @media (max-width: 550px) {
+        width: 300px;
+        height: 25px;
+    }
 `
 
 const Input = React.forwardRef(function Input({ placeholder, ...rest }, ref) {

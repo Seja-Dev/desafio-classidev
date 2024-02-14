@@ -25,6 +25,10 @@ const StyledCreate = styled.div`
     color: white;
     font-size: 20px;
     letter-spacing: 2px;
+
+    @media (max-width: 600px) {
+        height: 150px;
+    }
 `
 
 const StyledForm = styled.form`
@@ -34,6 +38,10 @@ const StyledForm = styled.form`
     align-items: center;
     gap: 15px;
     margin-bottom: 150px;
+
+    @media (max-width: 550px) {
+        margin-bottom: 70px;
+    }
 `
 
 export default function Create() {

@@ -12,8 +12,12 @@ const StyledCategory = styled.div`
     border-radius: 10px;
     padding: 8px 20px;
     display: flex;
-    flex-direction: column;
     cursor: pointer;
+
+    @media (max-width: 550px) {
+        width: 300px;
+        height: 25px;
+    }
 `
 
 const Text = styled.p`

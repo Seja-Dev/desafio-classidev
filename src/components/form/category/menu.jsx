@@ -1,5 +1,17 @@
 import styled from "styled-components"
 
+const MenuContainer = styled.div`
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
 const StyledMenu = styled.div`
     display: flex;
     flex-direction: column;
@@ -8,7 +20,6 @@ const StyledMenu = styled.div`
     border-radius: 10px;
     padding: 10px 10px;
     gap: 20px;
-    z-index: 200;
 `
 
 const Options = styled.div`
@@ -28,19 +39,21 @@ export default function Menu({ handleCategorySelect, search }) {
     }
 
     return(
-        <StyledMenu>
-            { search ? 
-                categoriesSearch.map((category, index) => (
-                    <Options key={index} onClick={() => handleClick(category)}>
-                    {category}
-                    </Options>
-                )) : 
-                categoriesInput.map((category, index) => (
-                    <Options key={index} onClick={() => handleClick(category)}>
-                    {category}
-                    </Options>
-                ))
-            }
-        </StyledMenu>
+        <MenuContainer>
+            <StyledMenu>
+                { search ? 
+                    categoriesSearch.map((category, index) => (
+                        <Options key={index} onClick={() => handleClick(category)}>
+                        {category}
+                        </Options>
+                    )) : 
+                    categoriesInput.map((category, index) => (
+                        <Options key={index} onClick={() => handleClick(category)}>
+                        {category}
+                        </Options>
+                    ))
+                }
+            </StyledMenu>
+        </MenuContainer>
     )
 }
