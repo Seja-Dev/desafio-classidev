@@ -24,14 +24,27 @@ const Container  = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 10px;
+  @media (max-width: 436px){
+    padding-bottom:50px;
+  }
 `
 const FormContainer = styled.div`
   margin-top: 20px;
   padding: 20px;
   width: 400px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   background-color: #3f3f3fe5;
+  @media (max-width: 436px){
+    padding: 25px;
+    width: 350px;
+    margin-top: 35px;
+  }
+  @media (max-width: 360px){
+    padding: 15px 17px;
+    width: 310px;
+  }
 `
 const Form = styled.form`
  display: flex;
@@ -77,9 +90,7 @@ function SignupPage () {
     } finally {
       setLoading(false)
     }
-  }
-  console.log(errors)
-    
+  } 
   return (
       <Container>
           <Logo />       
