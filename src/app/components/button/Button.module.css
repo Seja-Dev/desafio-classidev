@@ -1,0 +1,29 @@
+.buttonWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 1rem;
+    padding-bottom: 1rem; 
+   
+}
+
+.buttonPropper {
+    background-color: #F28000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 10px;
+    border-width: 0px;
+    padding: 20px;
+    min-width: 12vw;
+}
+
+.buttonTitle {
+    font-size: 1rem;
+    font-family: "Inter";
+    font-weight: 700;
+    color: #FFFFFF;
+    
+}

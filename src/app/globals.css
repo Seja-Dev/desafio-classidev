@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Inter";
+  background-color: #1F1F1F;
+}
+
+.rawlink {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.homeWrapper {
+  display: flex;
+  /*background-color: aqua;*/
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-decoration: none;
+  
+}

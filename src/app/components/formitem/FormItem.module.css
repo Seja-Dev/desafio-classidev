@@ -1,0 +1,47 @@
+.formWrapper {
+    background-color: #3b3b3b;
+    display: flex;
+    justify-content: center;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-top: 15vh;
+    padding-bottom: 10vh;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    min-height: 100vh;
+}
+
+.formTitle {
+    font-size: 1rem;
+    font-family: "Inter";
+    font-weight: 700;
+    color: #FFFFFF;
+    
+}
+
+.formSlogan {
+    font-size: 1.0rem;
+    font-family: "Inter";
+    font-style: italic;
+    color: #FFFFFF;
+    font-weight: 80;
+    
+    
+}
+
+.formItem {
+    background-color: #F28000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 10px;
+    border-width: 0px;
+    padding: 20px;
+    min-width: 12vw;
+}
+
+.rawlink {
+    text-decoration: none;
+    color: aliceblue;
+}
+
