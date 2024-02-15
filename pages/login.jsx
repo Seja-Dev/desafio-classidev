@@ -21,6 +21,7 @@ const Container  = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
    @media (max-width: 436px){
     gap: 15px;
   }
@@ -62,6 +63,9 @@ const ButtonAlt = styled(Button)`
   margin-left: 19px;
   width: 88%;
 `
+const LogoAlt = styled(Logo)`
+cursor: default;
+`
 
 export default function LoginPage(){
   const router = useRouter()
@@ -97,7 +101,7 @@ export default function LoginPage(){
   
   return(
     <Container>
-      <Logo />
+      <LogoAlt />
       <FormContainer>
           <Text>Entre em sua conta</Text>
           <Form onSubmit={ handleSubmit(onSubmit)}>

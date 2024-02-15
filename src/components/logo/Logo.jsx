@@ -19,10 +19,10 @@ const StyledSubText = styled.h3`
 ;
 
 `
-export default function Logo(){
+export default function Logo({...props}){
   const router = useRouter()
   return (
-    <LogoContainer onClick={() => router.push('/')}>
+    <LogoContainer {...props} onClick={() => router.push('/')}>
       <StyledLogo>ClassifiDev</StyledLogo>
       <StyledSubText>O seu classificado online</StyledSubText>
     </LogoContainer>

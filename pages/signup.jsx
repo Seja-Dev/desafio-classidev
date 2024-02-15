@@ -23,9 +23,11 @@ const Container  = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 10px;
+  gap: 10px;
+  padding: 40px;
   @media (max-width: 436px){
     padding-bottom:50px;
+     gap: 0px;
   }
 `
 const FormContainer = styled.div`
