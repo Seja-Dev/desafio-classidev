@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Container = styled.div`
   width: 100%;
@@ -9,7 +9,6 @@ const Container = styled.div`
   justify-content: center;
   position: static;
   bottom: 0;
-;
 `
 const Text = styled.h3`
   font-size: 18px;
@@ -18,8 +17,8 @@ const Text = styled.h3`
   line-height: 24px;
   color: ${(props) => props.theme.colors.white};
 `
-export default function Footer({...props}) {
-  return(
+export default function Footer({ ...props }) {
+  return (
     <Container {...props}>
       <Text>Criado por Ryan Lucas - Desafio SejaDev</Text>
     </Container>

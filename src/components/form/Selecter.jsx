@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import { useController } from 'react-hook-form'
 
 const ContainerBox = styled.div``
@@ -12,9 +12,9 @@ const StyledSelect = styled.select`
   font-weight: 600;
   line-height: 24px;
   cursor: pointer;
-  background-color: ${props => props.theme.colors.inputBackground};
-  color:  ${(props)  => props.theme.colors.textColor};
-  :focus{
+  background-color: ${(props) => props.theme.colors.inputBackground};
+  color: ${(props) => props.theme.colors.textColor};
+  :focus {
     outline: none;
   }
 `
@@ -36,37 +36,37 @@ const Line = styled.div`
   height: 100%;
   width: 1px;
   background-color: red;
-   background-color: ${(props)  => props.theme.textColor} ; 
+  background-color: ${(props) => props.theme.textColor};
 `
-export default function Selecter({ name , control, defaultValue='', type1, type2, ...props}){
+export default function Selecter({ name, control, defaultValue = '', type1, type2, ...props }) {
   const {
-    field :{ value, onChange},
-    
- } = useController({ name, control, defaultValue })  
-  return(
+    field: { value, onChange }
+  } = useController({ name, control, defaultValue })
+  return (
     <ContainerBox>
-
-    { type1 &&  
-        <StyledSelect {...props} value={value} onChange={onChange}>                
-          <option value='' disabled >Selecione sua categoria</option>
+      {type1 && (
+        <StyledSelect {...props} value={value} onChange={onChange}>
+          <option value="" disabled>
+            Selecione sua categoria
+          </option>
           <option value="Carros">Carros</option>
           <option value="Roupas e acessórios">Roupas e acessórios</option>
           <option value="Eletrônicos">Eletrônicos</option>
         </StyledSelect>
-    }
-    {type2 &&
+      )}
+      {type2 && (
         <ContainerSelect>
-            <Line />
-            <StyledSelectAlt {...props} value={value} onChange={onChange}>                
-                <option value='' disabled >Todas as categorias</option>
-                <option value="Carros">Carros</option>
-                <option value="Roupas e acessórios">Roupas e acessórios</option>
-                <option value="Eletrônicos">Eletrônicos</option>
-            </StyledSelectAlt>
-        </ContainerSelect> 
-    }
+          <Line />
+          <StyledSelectAlt {...props} value={value} onChange={onChange}>
+            <option value="" disabled>
+              Todas as categorias
+            </option>
+            <option value="Carros">Carros</option>
+            <option value="Roupas e acessórios">Roupas e acessórios</option>
+            <option value="Eletrônicos">Eletrônicos</option>
+          </StyledSelectAlt>
+        </ContainerSelect>
+      )}
     </ContainerBox>
-
-   
   )
 }

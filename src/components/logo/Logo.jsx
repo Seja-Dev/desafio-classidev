@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { useRouter } from "next/router";
+import styled from 'styled-components'
+import { useRouter } from 'next/router'
 
 const LogoContainer = styled.div`
   display: flex;
@@ -15,17 +15,13 @@ const StyledSubText = styled.h3`
   font-style: oblique;
   color: gray;
   font-weight: 100;
-
-;
-
 `
-export default function Logo({...props}){
+export default function Logo({ ...props }) {
   const router = useRouter()
   return (
     <LogoContainer {...props} onClick={() => router.push('/')}>
       <StyledLogo>ClassifiDev</StyledLogo>
       <StyledSubText>O seu classificado online</StyledSubText>
     </LogoContainer>
-    
   )
 }

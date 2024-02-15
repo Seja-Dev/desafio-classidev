@@ -1,7 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import moment from 'moment'
-
-
 
 const CardContainer = styled.div`
   display: flex;
@@ -19,7 +17,7 @@ const StyledCard = styled.div`
   border-radius: 10px;
   background: rgba(217, 217, 217, 1);
   padding: 25px;
-  @media ( max-width: 375px){
+  @media (max-width: 375px) {
     width: 270px;
     height: 295px;
   }
@@ -75,32 +73,31 @@ const HeaderContainer = styled.div`
   gap: 4px;
 `
 
-export default function Card({ title, date, price, description, category }){
-  return(
-        <CardContainer>
-            <StyledCard >
-                <HeaderContainer>
-                    <Title>{title}</Title>
-                    <DatePosted>{moment(date).format('LLL')}</DatePosted>
-                    <Price>{'R$ ' + price}</Price>             
-                </HeaderContainer>
-                <Description>{description}</Description>
-                <CategoryContainer>
-                    <CategoryImg 
-                    src={
-                      category === 'Roupas e acessórios' ? '/roupas.png':
-                      category === 'Eletrônicos' ? '/pc.png' :
-                      category === 'Carros'  ? '/car.png'
-                      : '' 
-                    }
-                    />
-                    <CategoryName>{category}</CategoryName>
-                </CategoryContainer>
-            </StyledCard>
-        </CardContainer>
-      
-  
-    
-
+export default function Card({ title, date, price, description, category }) {
+  return (
+    <CardContainer>
+      <StyledCard>
+        <HeaderContainer>
+          <Title>{title}</Title>
+          <DatePosted>{moment(date).format('LLL')}</DatePosted>
+          <Price>{'R$ ' + price}</Price>
+        </HeaderContainer>
+        <Description>{description}</Description>
+        <CategoryContainer>
+          <CategoryImg
+            src={
+              category === 'Roupas e acessórios'
+                ? '/roupas.png'
+                : category === 'Eletrônicos'
+                  ? '/pc.png'
+                  : category === 'Carros'
+                    ? '/car.png'
+                    : ''
+            }
+          />
+          <CategoryName>{category}</CategoryName>
+        </CategoryContainer>
+      </StyledCard>
+    </CardContainer>
   )
 }

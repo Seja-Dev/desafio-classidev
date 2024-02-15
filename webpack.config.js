@@ -2,23 +2,17 @@ const path = require('path')
 const NodemonPlugin = require('nodemon-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 
-module.exports ={
+module.exports = {
   entry: './index.js',
   target: 'node',
   mode: 'development',
   output: {
-    filename:'index.js',
-    path: path.resolve(__dirname,'dist')
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist')
   },
-  resolve:{
-    extensions: ['.js'],
+  resolve: {
+    extensions: ['.js']
   },
-  plugins:[
-    new NodemonPlugin()
-
-  ],
-  externals :[
-    nodeExternals()
-  ]
-
+  plugins: [new NodemonPlugin()],
+  externals: [nodeExternals()]
 }
