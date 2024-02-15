@@ -21,19 +21,29 @@ const Container  = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+   @media (max-width: 436px){
+    gap: 15px;
+  }
 `
 const FormContainer = styled.div`
   margin-top: 20px;
   padding: 50px;
   display: flex;
+  border-radius: 10px;
   flex-direction: column;
   background-color: #3f3f3fe5;
+  @media (max-width: 436px){
+    padding: 25px;
+  }
 `
 const Form = styled.form`
  display: flex;
  flex-direction: column;
  margin: 20px 0;
  gap: 7px;
+ @media (max-width: 436px){
+    margin: 10px 0px;
+  }
 `
 const Text = styled.h1`
   color: ${(props) => props.theme.colors.white};
@@ -43,6 +53,9 @@ const TextAlt = styled.p`
   color: ${(props) => props.theme.colors.white};
   font-size: 17px;
   text-align: center;
+    @media (max-width: 436px){
+      font-size: 13px;
+  }
 
 `
 const ButtonAlt = styled(Button)`
