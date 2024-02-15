@@ -1,0 +1,29 @@
+.vitrineWrapper {
+    display: flex;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-top: 15vh;
+    padding-bottom: 10vh;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    /*background-color: rgb(25, 61, 61);*/
+    min-width: auto;
+
+}
+
+.vitrineTitle {
+    font-size: 1rem;
+    font-family: "Inter";
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.vitrineSlogan {
+    font-size: 1.0rem;
+    font-family: "Inter";
+    font-style: italic;
+    color: #FFFFFF;
+    font-weight: 80;
+}
+
+;

@@ -1,0 +1,45 @@
+{
+    "user": {
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "address": {
+        "street": "123 Main Street",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+      },
+      "phone": {
+        "home": "555-1234",
+        "mobile": "555-5678"
+      }
+    },
+    "orders": [
+      {
+        "id": 1,
+        "items": [
+          {
+            "name": "Product A",
+            "price": 10.99,
+            "quantity": 2
+          },
+          {
+            "name": "Product B",
+            "price": 5.99,
+            "quantity": 1
+          }
+        ],
+        "total": 27.97
+      },
+      {
+        "id": 2,
+        "items": [
+          {
+            "name": "Product C",
+            "price": 24.99,
+            "quantity": 1
+          }
+        ],
+        "total": 24.99
+      }
+    ]
+  }
