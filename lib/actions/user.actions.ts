@@ -2,8 +2,9 @@
 
 import { CreateUserParams, UpdateUserParams } from "@/types";
 import { connectToDatabase } from "../database";
-import User from "../database/models/user.model";
+
 import Post from "../database/models/post.model";
+import User from "../database/models/user.model";
 
 export const createUser = async (user: CreateUserParams) => {
   try {
@@ -11,9 +12,10 @@ export const createUser = async (user: CreateUserParams) => {
 
     const newUser = await User.create(user);
 
-    return newUser;
+    return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
-    console.log("Error creating user", error);
+    console.error(error);
+    throw new Error(typeof error === "string" ? error : JSON.stringify(error));
   }
 };
 
