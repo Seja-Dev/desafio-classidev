@@ -2,6 +2,8 @@ import React from "react";
 import MobileNav from "./MobileNav";
 import Logo from "./Logo";
 import { Button } from "../ui/button";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -10,11 +12,34 @@ const Header = () => {
         <div className="flex flex-col">
           <Logo color="Light" />
         </div>
-        <MobileNav />
+        <div className="flex items-center gap-2">
+          <div className="flex gap-4">
+            <SignedIn>
+              <UserButton
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    avatarBox: "h-12 w-12",
+                  },
+                }}
+              />
+              <MobileNav />
+            </SignedIn>
+            <div>
+              <SignedOut>
+                <Button asChild className="rounded-lg bg-[#f28000]" size="lg">
+                  <Link href="/sign-in">Login</Link>
+                </Button>
+              </SignedOut>
+            </div>
+          </div>
 
-        <Button className="hidden w-[261px] rounded-lg bg-[#f28000] p-6 hover:bg-[#F38C19] md:flex">
-          Criar anúncio
-        </Button>
+          <SignedIn>
+            <Button className="hidden w-[261px] rounded-lg bg-[#f28000] p-6 hover:bg-[#F38C19] md:flex">
+              Criar anúncio
+            </Button>
+          </SignedIn>
+        </div>
       </div>
     </header>
   );
