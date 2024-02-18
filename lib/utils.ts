@@ -15,15 +15,8 @@ export function formatDate(data: string) {
 }
 
 export function formatPrice(valor: number) {
-  if (valor >= 1000) {
-    return valor.toLocaleString("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-  } else {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(valor);
-  }
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(valor);
 }

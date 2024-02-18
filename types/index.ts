@@ -35,3 +35,14 @@ export type GetRelatedpostsByCategoryParams = {
   limit?: number
   page: number | string
 }
+
+export type DeletePostParams = {
+  postId: string
+}
+
+export type GetAllPostsParams = {
+  query: string
+  category: string
+  limit: number
+  page: number
+}

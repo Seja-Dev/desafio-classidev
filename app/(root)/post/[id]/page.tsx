@@ -4,14 +4,11 @@ import {
 } from "@/lib/actions/post.actions";
 import React from "react";
 import Link from "next/link";
-import {
-  ArrowLeftIcon,
-  Edit2Icon,
-  PhoneCallIcon,
-  Trash2Icon,
-} from "lucide-react";
+import { ArrowLeftIcon, PhoneCallIcon } from "lucide-react";
 import { formatDate, formatPrice } from "@/lib/utils";
 import ContainerCard from "@/components/shared/ContainerCard";
+import DeleteCardDetails from "@/components/shared/DeleteCardDetails";
+import { CATEGORY_ICON } from "@/constants/icons";
 
 interface PageProps {
   params: {
@@ -21,7 +18,6 @@ interface PageProps {
 }
 
 const page = async ({ params: { id }, searchParams }: PageProps) => {
-  console.log(id, "");
   const post = await getPostById(id);
 
   const relatedPosts = await getRelatedPostsByCategory({
@@ -29,8 +25,6 @@ const page = async ({ params: { id }, searchParams }: PageProps) => {
     postId: post._id,
     page: searchParams.page as string,
   });
-
-  console.log(post);
 
   return (
     <>
@@ -44,21 +38,21 @@ const page = async ({ params: { id }, searchParams }: PageProps) => {
             <div className="flex flex-col gap-1">
               <div className="flex items-baseline gap-8">
                 <h3 className="text-5xl font-bold text-white">{post.name}</h3>
-                <span className="flex items-center text-white underline">
-                  <Edit2Icon size={24} />
-                  Editar
-                </span>
-                <span className="flex text-red-600 underline">
-                  <Trash2Icon size={24} />
-                  Exluir{" "}
-                </span>
+                <DeleteCardDetails postId={post._id} />
               </div>
-              <p className="font-bold text-white">{post.category.name}</p>
+              <p className="flex items-center gap-2 font-bold text-white">
+                {
+                  CATEGORY_ICON[
+                    post.category.name as keyof typeof CATEGORY_ICON
+                  ]
+                }{" "}
+                {post.category.name}{" "}
+              </p>
               <p className="text-sm italic text-[#adacac]">
                 Postado em {formatDate(post.createdDate)}
               </p>
               <p className="text-xl font-semibold text-[#00FF0A]">
-                R$ {formatPrice(Number(post.price))}{" "}
+                {formatPrice(Number(post.price))}
               </p>
             </div>
 

@@ -1,10 +1,20 @@
 "use server";
 
-import { CreatePostParams, GetRelatedpostsByCategoryParams } from "@/types";
+import {
+  CreatePostParams,
+  DeletePostParams,
+  GetAllPostsParams,
+  GetRelatedpostsByCategoryParams,
+} from "@/types";
 import { connectToDatabase } from "../database";
 import User from "../database/models/user.model";
 import Post from "../database/models/post.model";
 import Category from "../database/models/category.model";
+import console from "console";
+
+const getCategoryByName = async (name: string) => {
+  return Category.findOne({ name: { $regex: name, $options: 'i' } })
+}
 
 const populatePost = (query: any) => {
   return query
@@ -51,6 +61,16 @@ export async function getPostById(postId: string) {
   }
 }
 
+export async function deletePost({ postId }: DeletePostParams) {
+  try {
+    await connectToDatabase();
+
+    await Post.findByIdAndDelete(postId);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function getRelatedPostsByCategory({
   categoryId,
   postId,
@@ -58,21 +78,54 @@ export async function getRelatedPostsByCategory({
   page = 1,
 }: GetRelatedpostsByCategoryParams) {
   try {
-    await connectToDatabase()
+    await connectToDatabase();
 
-    const skipAmount = (Number(page) - 1) * limit
-    const conditions = { $and: [{ category: categoryId }, { _id: { $ne: postId } }] }
+    const skipAmount = (Number(page) - 1) * limit;
+    const conditions = {
+      $and: [{ category: categoryId }, { _id: { $ne: postId } }],
+    };
 
     const postQuery = Post.find(conditions)
+      .sort({ createdAt: "desc" })
+      .skip(skipAmount)
+      .limit(limit);
+
+    const posts = await populatePost(postQuery);
+    const postsCount = await Post.countDocuments(conditions);
+
+    return {
+      data: JSON.parse(JSON.stringify(posts)),
+      totalPages: Math.ceil(postsCount / limit),
+    };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getAllPosts({ query, limit = 6, page, category }: GetAllPostsParams) {
+  try {
+    await connectToDatabase()
+
+    const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {}
+    const categoryCondition = category ? await getCategoryByName(category) : null
+    const conditions = {
+      $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
+    }
+
+    const skipAmount = (Number(page) - 1) * limit
+    const postsQuery = Post.find(conditions)
       .sort({ createdAt: 'desc' })
       .skip(skipAmount)
       .limit(limit)
 
-    const posts = await populatePost(postQuery)
+    const posts = await populatePost(postsQuery)
     const postsCount = await Post.countDocuments(conditions)
 
-    return { data: JSON.parse(JSON.stringify(posts)), totalPages: Math.ceil(postsCount / limit) }
+    return {
+      data: JSON.parse(JSON.stringify(posts)),
+      totalPages: Math.ceil(postsCount / limit),
+    }
   } catch (error) {
-    console.error(error)
+    console.log(error)
   }
 }
