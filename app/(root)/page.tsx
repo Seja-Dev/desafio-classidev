@@ -1,4 +1,4 @@
-import Card from "@/components/shared/Card";
+// import Card from "@/components/shared/Card";
 
 const data = [
   {
@@ -35,7 +35,7 @@ export default function Home() {
     <div className="m-auto flex max-w-[1200px] flex-wrap justify-center gap-5 p-5">
       {data.map((item) => (
         <>
-          <Card
+          {/* <Card
             key={item.id}
             id={item.id}
             name={item.name}
@@ -61,7 +61,7 @@ export default function Home() {
             price={item.preço}
             tel={item.tel}
             description={item.description}
-          />
+          /> */}
         </>
       ))}
     </div>

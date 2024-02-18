@@ -27,3 +27,11 @@ export type CreatePostParams = {
     price: string;
   };
 };
+
+
+export type GetRelatedpostsByCategoryParams = {
+  categoryId: string
+  postId: string
+  limit?: number
+  page: number | string
+}

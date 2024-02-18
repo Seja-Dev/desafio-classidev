@@ -3,11 +3,12 @@ import { Schema, model, models, Document } from "mongoose";
 export interface IPost extends Document {
   _id: string;
   name: string;
+  createdDate: Date;
   description: string;
   price: string;
   tel: string;
   category: { _id: string; name: string };
-  createdBy: {_id: string, firstName: string, lastName: string};
+  createdBy: { _id: string; firstName: string; lastName: string };
 }
 
 const PostSchema = new Schema({
@@ -17,6 +18,7 @@ const PostSchema = new Schema({
   tel: { type: String, required: true },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
   createdBy: { type: Schema.Types.ObjectId, ref: "User" },
+  createdDate: { type: Date, default: Date.now},
 });
 
 const Post = models.Post || model("Post", PostSchema);
