@@ -9,7 +9,7 @@ interface DeleteCardDetialsProps {
 
 const DeleteCardDetails = ({ postId }: DeleteCardDetialsProps) => {
   const handleDelete = async (postId: string) => {
-    await deletePost({ postId });
+    await deletePost({ postId, path: `/post/${postId}` });
   };
 
   return (

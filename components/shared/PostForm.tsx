@@ -18,15 +18,23 @@ import { postDefaultValues } from "@/constants";
 import Dropdown from "./Dropdown";
 import { Textarea } from "../ui/textarea";
 import { useRouter } from "next/navigation";
-import { createPost } from "@/lib/actions/post.actions";
+import { createPost, updatePost } from "@/lib/actions/post.actions";
+import { IPost } from "@/lib/database/models/post.model";
 
 interface PostFormProps {
   userId: string;
   type: "Create" | "Update";
+  post?: IPost;
+  postId?: string;
 }
 
-const PostForm = ({ userId, type }: PostFormProps) => {
-  const initalValues = postDefaultValues;
+const PostForm = ({ userId, type, post, postId }: PostFormProps) => {
+  const initalValues =
+    post && type === "Update"
+      ? {
+          ...post,
+        }
+      : postDefaultValues;
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -36,19 +44,37 @@ const PostForm = ({ userId, type }: PostFormProps) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("values", values);
-
     if (type === "Create") {
       try {
         const newPost = await createPost({
           post: { ...values, categoryId: values.categoryId as string },
           userId,
-          path: "/profile",
+          path: `/post`,
         });
 
         if (newPost) {
           form.reset();
           router.push(`/post/${newPost._id}`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (type === "Update") {
+      if (!postId) {
+        router.back();
+        return;
+      }
+      try {
+        const updatedPost = await updatePost({
+          userId,
+          post: { ...values, _id: postId },
+          path: `/post/${postId}`,
+        });
+
+        if (updatedPost) {
+          form.reset();
+          router.push(`/post/${updatedPost._id}`);
         }
       } catch (error) {
         console.log(error);

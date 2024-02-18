@@ -32,7 +32,7 @@ const Card = ({ post }: CardProps) => {
 
         {isPostCreator && (
           <div className="absolute right-2 top-2 ">
-            <Link href={`/post/${post._id}/update`}>
+            <Link href={`/post/create/${post._id}/update`}>
               <Image
                 src="/assets/icons/edit.svg"
                 alt="edit"

@@ -26,26 +26,37 @@ export type CreatePostParams = {
     categoryId: string;
     price: string;
   };
-  path: string
-
+  path: string;
 };
 
-
 export type GetRelatedpostsByCategoryParams = {
-  categoryId: string
-  postId: string
-  limit?: number
-  page: number | string
-}
+  categoryId: string;
+  postId: string;
+  limit?: number;
+  page: number | string;
+};
 
 export type DeletePostParams = {
-  postId: string
-  path: string
-}
+  postId: string;
+  path: string;
+};
 
 export type GetAllPostsParams = {
-  query: string
-  category: string
-  limit: number
-  page: number
-}
+  query: string;
+  category: string;
+  limit: number;
+  page: number;
+};
+
+export type UpdatePostParams = {
+  userId: string;
+  post: {
+    _id: string;
+    name: string;
+    description: string;
+    categoryId: string;
+    price: string;
+  };
+
+  path: string;
+};

@@ -24,6 +24,11 @@ const Header = () => {
                 }}
               />
               <MobileNav />
+              <Link href="/post/create">
+                <Button className="hidden w-[261px] rounded-lg bg-[#f28000] p-6 hover:bg-[#F38C19] md:flex">
+                  Criar anúncio
+                </Button>
+              </Link>
             </SignedIn>
             <div>
               <SignedOut>
@@ -38,13 +43,9 @@ const Header = () => {
             </div>
           </div>
 
-          <SignedIn>
-            <Link href="/post/create">
-              <Button className="hidden w-[261px] rounded-lg bg-[#f28000] p-6 hover:bg-[#F38C19] md:flex">
-                Criar anúncio
-              </Button>
-            </Link>
-          </SignedIn>
+          {/* <SignedIn>
+           
+          </SignedIn> */}
         </div>
       </div>
     </header>

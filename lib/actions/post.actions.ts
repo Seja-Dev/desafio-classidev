@@ -1,11 +1,12 @@
 "use server";
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
 import {
   CreatePostParams,
   DeletePostParams,
   GetAllPostsParams,
   GetRelatedpostsByCategoryParams,
+  UpdatePostParams,
 } from "@/types";
 import { connectToDatabase } from "../database";
 import User from "../database/models/user.model";
@@ -13,9 +14,10 @@ import Post from "../database/models/post.model";
 import Category from "../database/models/category.model";
 import console from "console";
 
+
 const getCategoryByName = async (name: string) => {
-  return Category.findOne({ name: { $regex: name, $options: 'i' } })
-}
+  return Category.findOne({ name: { $regex: name, $options: "i" } });
+};
 
 const populatePost = (query: any) => {
   return query
@@ -40,7 +42,7 @@ export const createPost = async ({ post, userId, path }: CreatePostParams) => {
       category: post.categoryId,
       createdBy: userId,
     });
-    revalidatePath(path)
+     revalidatePath(path)
     return newPost;
   } catch (error) {
     console.error(error);
@@ -55,6 +57,7 @@ export async function getPostById(postId: string) {
     const post = await populatePost(Post.findById(postId));
 
     if (!post) throw new Error("Post not found");
+   
 
     return JSON.parse(JSON.stringify(post));
   } catch (error) {
@@ -67,7 +70,29 @@ export async function deletePost({ postId, path }: DeletePostParams) {
     await connectToDatabase();
 
     const deletedPost = await Post.findByIdAndDelete(postId);
-    if (deletedPost) revalidatePath(path)
+    if (deletedPost) revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updatePost({ userId, post, path }: UpdatePostParams) {
+  try {
+    await connectToDatabase();
+
+    const postUpdate = await Post.findById(post._id);
+    if (!postUpdate || postUpdate.createdBy.toHexString() !== userId) {
+      throw new Error("Unauthorized or event not found");
+    }
+
+    const updatedEvent = await Post.findByIdAndUpdate(
+      post._id,
+      { ...post, category: post.categoryId },
+      { new: true }
+    );
+    revalidatePath(path);
+
+    return JSON.parse(JSON.stringify(updatedEvent));
   } catch (error) {
     console.log(error);
   }
@@ -104,30 +129,42 @@ export async function getRelatedPostsByCategory({
   }
 }
 
-export async function getAllPosts({ query, limit = 6, page, category }: GetAllPostsParams) {
+export async function getAllPosts({
+  query,
+  limit = 6,
+  page,
+  category,
+}: GetAllPostsParams) {
   try {
-    await connectToDatabase()
+    await connectToDatabase();
 
-    const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {}
-    const categoryCondition = category ? await getCategoryByName(category) : null
+    const titleCondition = query
+      ? { title: { $regex: query, $options: "i" } }
+      : {};
+    const categoryCondition = category
+      ? await getCategoryByName(category)
+      : null;
     const conditions = {
-      $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
-    }
+      $and: [
+        titleCondition,
+        categoryCondition ? { category: categoryCondition._id } : {},
+      ],
+    };
 
-    const skipAmount = (Number(page) - 1) * limit
+    const skipAmount = (Number(page) - 1) * limit;
     const postsQuery = Post.find(conditions)
-      .sort({ createdAt: 'desc' })
+      .sort({ createdAt: "desc" })
       .skip(skipAmount)
-      .limit(limit)
+      .limit(limit);
 
-    const posts = await populatePost(postsQuery)
-    const postsCount = await Post.countDocuments(conditions)
+    const posts = await populatePost(postsQuery);
+    const postsCount = await Post.countDocuments(conditions);
 
     return {
       data: JSON.parse(JSON.stringify(posts)),
       totalPages: Math.ceil(postsCount / limit),
-    }
+    };
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }

@@ -4,8 +4,8 @@ import Card from "./Card";
 
 interface ContainerCarsProps {
   data: IPost[];
-  limit: number;
-  page: number | string;
+  limit?: number;
+  page?: number | string;
   totalPage?: number;
 }
 
@@ -25,7 +25,9 @@ const ContainerCard = ({
         </div>
       ) : (
         <div className="">
-          <h3 className="">Nenhum postagem contrada!</h3>
+          <h3 className=" text-4xl font-bold text-white">
+            Nenhum postagem contrada!
+          </h3>
         </div>
       )}
     </>
