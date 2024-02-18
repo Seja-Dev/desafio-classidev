@@ -7,11 +7,10 @@ const CreatePost = () => {
 
   const userId = sessionClaims?.userId as string;
 
-
   return (
     <>
       <section className="flex min-h-[100%] flex-col items-center justify-center bg-[#0E0E0E]">
-        <h3 className="text-4xl font-bold text-white">Crie seu anúncio</h3>
+        <h3 className="py-4 text-4xl font-bold text-white">Crie seu anúncio</h3>
 
         <div className=" w-[620px]">
           <PostForm userId={userId} type="Create" />

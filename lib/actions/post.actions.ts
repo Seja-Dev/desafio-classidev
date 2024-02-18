@@ -1,4 +1,5 @@
 "use server";
+import { revalidatePath } from 'next/cache'
 
 import {
   CreatePostParams,
@@ -26,7 +27,7 @@ const populatePost = (query: any) => {
     .populate({ path: "category", model: Category, select: "_id name" });
 };
 
-export const createPost = async ({ post, userId }: CreatePostParams) => {
+export const createPost = async ({ post, userId, path }: CreatePostParams) => {
   try {
     await connectToDatabase();
 
@@ -39,7 +40,7 @@ export const createPost = async ({ post, userId }: CreatePostParams) => {
       category: post.categoryId,
       createdBy: userId,
     });
-
+    revalidatePath(path)
     return newPost;
   } catch (error) {
     console.error(error);
@@ -61,11 +62,12 @@ export async function getPostById(postId: string) {
   }
 }
 
-export async function deletePost({ postId }: DeletePostParams) {
+export async function deletePost({ postId, path }: DeletePostParams) {
   try {
     await connectToDatabase();
 
-    await Post.findByIdAndDelete(postId);
+    const deletedPost = await Post.findByIdAndDelete(postId);
+    if (deletedPost) revalidatePath(path)
   } catch (error) {
     console.log(error);
   }

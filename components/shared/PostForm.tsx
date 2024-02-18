@@ -43,6 +43,7 @@ const PostForm = ({ userId, type }: PostFormProps) => {
         const newPost = await createPost({
           post: { ...values, categoryId: values.categoryId as string },
           userId,
+          path: "/profile",
         });
 
         if (newPost) {
@@ -145,7 +146,9 @@ const PostForm = ({ userId, type }: PostFormProps) => {
             )}
           />
         </div>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="bg-[#f28000] p-6 hover:bg-[#d39043]">
+          Submit
+        </Button>
       </form>
     </Form>
   );

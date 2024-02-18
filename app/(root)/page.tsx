@@ -11,7 +11,7 @@ export default async function Home() {
 
   return (
     <div className="m-auto flex max-w-[1200px] flex-wrap justify-center gap-5 p-5">
-      <ContainerCard data={posts?.data} />
+      <ContainerCard data={posts?.data} limit={9} page={1} totalPage={2} />
     </div>
   );
 }

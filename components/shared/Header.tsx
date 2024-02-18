@@ -27,7 +27,11 @@ const Header = () => {
             </SignedIn>
             <div>
               <SignedOut>
-                <Button asChild className="rounded-lg bg-[#f28000]" size="lg">
+                <Button
+                  asChild
+                  className="rounded-lg bg-[#f28000] hover:bg-[#d39043]"
+                  size="lg"
+                >
                   <Link href="/sign-in">Login</Link>
                 </Button>
               </SignedOut>
@@ -35,9 +39,11 @@ const Header = () => {
           </div>
 
           <SignedIn>
-            <Button className="hidden w-[261px] rounded-lg bg-[#f28000] p-6 hover:bg-[#F38C19] md:flex">
-              Criar anúncio
-            </Button>
+            <Link href="/post/create">
+              <Button className="hidden w-[261px] rounded-lg bg-[#f28000] p-6 hover:bg-[#F38C19] md:flex">
+                Criar anúncio
+              </Button>
+            </Link>
           </SignedIn>
         </div>
       </div>

@@ -26,6 +26,8 @@ export type CreatePostParams = {
     categoryId: string;
     price: string;
   };
+  path: string
+
 };
 
 
@@ -38,6 +40,7 @@ export type GetRelatedpostsByCategoryParams = {
 
 export type DeletePostParams = {
   postId: string
+  path: string
 }
 
 export type GetAllPostsParams = {
