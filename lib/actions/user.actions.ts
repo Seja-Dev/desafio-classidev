@@ -7,17 +7,17 @@ import Post from "../database/models/post.model";
 import User from "../database/models/user.model";
 
 export const createUser = async (user: CreateUserParams) => {
-  try {
-    await connectToDatabase();
+  try{
+   await connectToDatabase() 
 
-    const newUser = await User.create(user);
+   const newUser = await User.create(user)
 
-    return JSON.parse(JSON.stringify(newUser));
-  } catch (error) {
-    console.error(error);
-    throw new Error(typeof error === "string" ? error : JSON.stringify(error));
+   return newUser
+
+  }catch(error) {
+    console.log(error)
   }
-};
+}
 
 export async function getUserById(userId: string) {
   try {
@@ -65,15 +65,14 @@ export async function deleteUser(clerkId: string) {
 
     // Unlink relationships
     // await Promise.all([
-    //   // Update the 'events' collection to remove references to the user
+  
     //   Post.updateMany(
     //     { _id: { $in: userToDelete.posts } },
-    //     { $pull: { organizer: userToDelete._id } }
+    //     { $pull: { createdBy: userToDelete._id } }
     //   ),
 
     // ])
 
-    // Delete user
     const deletedUser = await User.findByIdAndDelete(userToDelete._id);
 
     return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
