@@ -42,10 +42,6 @@ const Header = () => {
               </SignedOut>
             </div>
           </div>
-
-          {/* <SignedIn>
-           
-          </SignedIn> */}
         </div>
       </div>
     </header>

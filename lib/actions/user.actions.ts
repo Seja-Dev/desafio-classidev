@@ -63,16 +63,6 @@ export async function deleteUser(clerkId: string) {
       { $pull: { organizer: userToDelete._id } }
     );
 
-    // Unlink relationships
-    // await Promise.all([
-  
-    //   Post.updateMany(
-    //     { _id: { $in: userToDelete.posts } },
-    //     { $pull: { createdBy: userToDelete._id } }
-    //   ),
-
-    // ])
-
     const deletedUser = await User.findByIdAndDelete(userToDelete._id);
 
     return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;

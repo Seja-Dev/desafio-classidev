@@ -110,7 +110,12 @@ const page = async ({ params: { id }, searchParams }: PageProps) => {
           Postagens relacionadas
         </h3>
 
-        <ContainerCard data={relatedPosts?.data} />
+        <ContainerCard
+          data={relatedPosts?.data}
+          limit={9}
+          page={1}
+          totalPages={2}
+        />
       </section>
     </section>
   );

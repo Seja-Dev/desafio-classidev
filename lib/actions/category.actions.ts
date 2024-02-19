@@ -5,20 +5,6 @@ import { connectToDatabase } from "../database";
 import Category from "../database/models/category.model";
 
 
-// export const createCategory = async ({categoryName}: CreateCategoryParams) => {
-
-//   try {
-//     await connectToDatabase();
-
-//     const newCategory = await Category.create({ name: categoryName });
-
-//     return newCategory;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-
 export const getAllCategories = async () => {
   try {
     await connectToDatabase();
@@ -30,7 +16,6 @@ export const getAllCategories = async () => {
     console.error(error);
   }
 };
-
 
 const categorias = [
   { name: "Eletrônicos" },

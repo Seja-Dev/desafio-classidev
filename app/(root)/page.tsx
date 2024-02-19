@@ -24,7 +24,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
           <CategoryFilter />
         </Search>
       </div>
-      <ContainerCard data={posts?.data} limit={9} page={1} totalPage={2} />
+      <ContainerCard data={posts?.data} limit={9} page={page} totalPages={posts?.totalPages} />
     </div>
   );
 }

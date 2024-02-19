@@ -82,17 +82,17 @@ export async function updatePost({ userId, post, path }: UpdatePostParams) {
 
     const postUpdate = await Post.findById(post._id);
     if (!postUpdate || postUpdate.createdBy.toHexString() !== userId) {
-      throw new Error("Unauthorized or event not found");
+      throw new Error("Unauthorized or post not found");
     }
 
-    const updatedEvent = await Post.findByIdAndUpdate(
+    const updatedPost = await Post.findByIdAndUpdate(
       post._id,
       { ...post, category: post.categoryId },
       { new: true }
     );
     revalidatePath(path);
 
-    return JSON.parse(JSON.stringify(updatedEvent));
+    return JSON.parse(JSON.stringify(updatedPost));
   } catch (error) {
     console.log(error);
   }

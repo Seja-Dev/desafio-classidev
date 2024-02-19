@@ -17,6 +17,13 @@ const Card = ({ post }: CardProps) => {
 
   const isPostCreator = userId === post.createdBy._id.toString();
 
+  const nameCategory = post.category.name;
+
+  const containsSpace = nameCategory.indexOf(" ") !== -1;
+  const iconCategory = containsSpace
+    ? nameCategory.split(" ")[0]
+    : nameCategory;
+
   return (
     <>
       <div className="relative flex min-h-[313px] max-w-[334px] flex-col   rounded-lg bg-white p-6">
@@ -49,7 +56,7 @@ const Card = ({ post }: CardProps) => {
           <div className="mt-7 flex flex-col gap-2">
             <p className="line-clamp-6 text-sm italic">{post.description}</p>
             <p className="flex items-center gap-2">
-              {CATEGORY_ICON[post.category.name as keyof typeof CATEGORY_ICON]}{" "}
+              {CATEGORY_ICON[iconCategory as keyof typeof CATEGORY_ICON]}{" "}
               {post.category.name}{" "}
             </p>
           </div>
