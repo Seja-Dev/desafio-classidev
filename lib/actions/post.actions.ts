@@ -138,15 +138,15 @@ export async function getAllPosts({
   try {
     await connectToDatabase();
 
-    const titleCondition = query
-      ? { title: { $regex: query, $options: "i" } }
+    const nameCondition = query
+      ? { name: { $regex: query, $options: "i" } }
       : {};
     const categoryCondition = category
       ? await getCategoryByName(category)
       : null;
     const conditions = {
       $and: [
-        titleCondition,
+        nameCondition,
         categoryCondition ? { category: categoryCondition._id } : {},
       ],
     };
