@@ -24,7 +24,7 @@ export const deleteCard = async (id) => {
     _id: id
   })
 }
-export const editCard = async (body, user) => {
+export const editCard = async (body) => {
   return await Anuncio.findOneAndUpdate(
     {
       _id: body.id

@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import axios from 'axios'
 import { useSWRConfig } from 'swr'
-import { useRouter } from 'next/router'
 import moment from 'moment'
 
 import EditCard from '../card/EditCard'
