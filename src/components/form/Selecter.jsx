@@ -71,7 +71,7 @@ export default function Selecter({
         <ContainerSelect>
           <Line />
           <StyledSelectAlt {...props} value={value} onChange={handleChange}>
-            <option value="Todas as categorias">Todas as categorias</option>
+            <option value="">Todas as categorias</option>
             <option value="Carros">Carros</option>
             <option value="Roupas e acessórios">Roupas e acessórios</option>
             <option value="Eletrônicos">Eletrônicos</option>
