@@ -20,9 +20,7 @@ const Card = ({ post }: CardProps) => {
   const nameCategory = post.category.name;
 
   const containsSpace = nameCategory.indexOf(" ") !== -1;
-  const iconCategory = containsSpace
-    ? nameCategory.split(" ")[0]
-    : nameCategory;
+  const iconCategory = containsSpace ? nameCategory.split(" ")[0]: nameCategory;
 
   return (
     <>

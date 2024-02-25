@@ -9,14 +9,15 @@ import {
 } from "@/components/ui/select";
 import { getAllCategories } from "@/lib/actions/category.actions";
 import { ICategory } from "@/lib/database/models/category.model";
-import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const CategoryFilter = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const router = useRouter();
+  const { replace } = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -29,23 +30,34 @@ const CategoryFilter = () => {
   }, []);
 
   const onSelectCategory = (category: string) => {
-    let newUrl = "";
+    const params = new URLSearchParams(searchParams);
 
     if (category && category !== "Todos") {
-      newUrl = formUrlQuery({
-        params: searchParams.toString(),
-        key: "category",
-        value: category,
-      });
+      params.set("category", category);
     } else {
-      newUrl = removeKeysFromQuery({
-        params: searchParams.toString(),
-        keysToRemove: ["category"],
-      });
+      params.delete("category");
     }
-
-    router.push(newUrl, { scroll: false });
+    replace(`${pathname}?${params.toString()}`);
   };
+
+  // const onSelectCategory = (category: string) => {
+  //   let newUrl = "";
+
+  //   if (category && category !== "Todos") {
+  //     newUrl = formUrlQuery({
+  //       params: searchParams.toString(),
+  //       key: "category",
+  //       value: category,
+  //     });
+  //   } else {
+  //     newUrl = removeKeysFromQuery({
+  //       params: searchParams.toString(),
+  //       keysToRemove: ["category"],
+  //     });
+  //   }
+
+  //   router.push(newUrl, { scroll: false });
+  // };
 
   return (
     <Select onValueChange={(value: string) => onSelectCategory(value)}>

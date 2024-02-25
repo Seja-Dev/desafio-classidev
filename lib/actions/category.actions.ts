@@ -17,7 +17,9 @@ export const getAllCategories = async () => {
   }
 };
 
-const categorias = [
+
+
+const categories = [
   { name: "Eletrônicos" },
   { name: "Roupas e acessórios" },
   { name: "Carros" },
@@ -27,7 +29,7 @@ const categorias = [
 export const insertCategory = async () => {
   try {
     await connectToDatabase();
-    const newCategory = await Category.insertMany(categorias);
+    const newCategory = await Category.insertMany(categories);
     return newCategory;
   } catch (error) {
     console.error(error);

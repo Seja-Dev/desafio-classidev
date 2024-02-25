@@ -12,10 +12,11 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
   const posts = await getAllPosts({
     query: searchText,
-    category,
+    limit: 6,
     page,
-    limit: 9,
+    category,
   });
+  
 
   return (
     <div className="m-auto flex max-w-[1200px] flex-wrap  justify-center gap-5 p-5">
@@ -24,7 +25,12 @@ export default async function Home({ searchParams }: SearchParamProps) {
           <CategoryFilter />
         </Search>
       </div>
-      <ContainerCard data={posts?.data} limit={9} page={page} totalPages={posts?.totalPages} />
+      <ContainerCard
+        data={posts?.data}
+        limit={9}
+        page={page}
+        totalPages={posts?.totalPages}
+      />
     </div>
   );
 }

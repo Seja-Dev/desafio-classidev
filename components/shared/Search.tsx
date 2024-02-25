@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Input } from "@/components/ui/input";
-import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Search = ({
   placeholder = "Pesquise pelo título...",
@@ -13,32 +13,45 @@ const Search = ({
   placeholder?: string;
   children: React.ReactNode;
 }) => {
-  const [query, setQuery] = useState("");
-  const router = useRouter();
+  // const [query, setQuery] = useState("");
+  // const router = useRouter();
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      let newUrl = "";
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
-      if (query) {
-        newUrl = formUrlQuery({
-          params: searchParams.toString(),
-          key: "query",
-          value: query,
-        });
-      } else {
-        newUrl = removeKeysFromQuery({
-          params: searchParams.toString(),
-          keysToRemove: ["query"],
-        });
-      }
+  function handleSearch(term: string) {
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set('query', term);
+    } else {
+      params.delete('query');
+    }
+    replace( `${pathname}?${params.toString()}`)
+  }
 
-      router.push(newUrl, { scroll: false });
-    }, 300);
+  // useEffect(() => {
+  //   const delayDebounceFn = setTimeout(() => {
+  //     let newUrl = "";
 
-    return () => clearTimeout(delayDebounceFn);
-  }, [query, searchParams, router]);
+  //     if (query) {
+  //       newUrl = formUrlQuery({
+  //         params: searchParams.toString(),
+  //         key: "query",
+  //         value: query,
+  //       });
+  //     } else {
+  //       newUrl = removeKeysFromQuery({
+  //         params: searchParams.toString(),
+  //         keysToRemove: ["query"],
+  //       });
+  //     }
+
+  //     router.push(newUrl, { scroll: false });
+  //   }, 300);
+
+  //   return () => clearTimeout(delayDebounceFn);
+  // }, [query, searchParams, router]);
 
   return (
     <div className=" relative flex min-h-[54px] min-w-[704px] items-center justify-center overflow-hidden rounded-lg bg-[#A4A4A4] px-4 ">
@@ -52,7 +65,10 @@ const Search = ({
       <Input
         type="text"
         placeholder={placeholder}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          handleSearch(e.target.value);
+        }}
+        // onChange={(e) => setQuery(e.target.value)}
         className="border-0 bg-[#A4A4A4] ps-9 text-base font-medium  leading-[24px] outline-offset-0 placeholder:text-black focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
       />
       |{children}

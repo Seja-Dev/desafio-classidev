@@ -14,18 +14,13 @@ import Post from "../database/models/post.model";
 import Category from "../database/models/category.model";
 import console from "console";
 
-
 const getCategoryByName = async (name: string) => {
   return Category.findOne({ name: { $regex: name, $options: "i" } });
 };
 
 const populatePost = (query: any) => {
   return query
-    .populate({
-      path: "createdBy",
-      model: User,
-      select: "_id firstName lastName",
-    })
+    .populate({path: "createdBy", model: User,select: "_id firstName lastName", })
     .populate({ path: "category", model: Category, select: "_id name" });
 };
 
@@ -42,7 +37,7 @@ export const createPost = async ({ post, userId, path }: CreatePostParams) => {
       category: post.categoryId,
       createdBy: userId,
     });
-     revalidatePath(path)
+    revalidatePath(path);
     return newPost;
   } catch (error) {
     console.error(error);
@@ -57,7 +52,6 @@ export async function getPostById(postId: string) {
     const post = await populatePost(Post.findById(postId));
 
     if (!post) throw new Error("Post not found");
-   
 
     return JSON.parse(JSON.stringify(post));
   } catch (error) {
@@ -129,27 +123,15 @@ export async function getRelatedPostsByCategory({
   }
 }
 
-export async function getAllPosts({
-  query,
-  limit = 6,
-  page,
-  category,
-}: GetAllPostsParams) {
+export async function getAllPosts({query, limit = 6, page, category}: GetAllPostsParams) {
   try {
     await connectToDatabase();
 
-    const nameCondition = query
-      ? { name: { $regex: query, $options: "i" } }
-      : {};
-    const categoryCondition = category
-      ? await getCategoryByName(category)
-      : null;
-    const conditions = {
-      $and: [
-        nameCondition,
-        categoryCondition ? { category: categoryCondition._id } : {},
-      ],
-    };
+    const nameCondition = query ? { name: { $regex: query, $options: "i" } } : {};
+
+    const categoryCondition = category ? await getCategoryByName(category): null;
+
+    const conditions = { $and: [ nameCondition, categoryCondition ? { category: categoryCondition._id } : {}, ]};
 
     const skipAmount = (Number(page) - 1) * limit;
     const postsQuery = Post.find(conditions)
