@@ -3,15 +3,14 @@
 import Image from "next/image";
 import React from "react";
 import { Input } from "@/components/ui/input";
+import CategoryFilter from "./CategoryFilter";
 // import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Search = ({
   placeholder = "Pesquise pelo título...",
-  children,
 }: {
   placeholder?: string;
-  children: React.ReactNode;
 }) => {
   // const [query, setQuery] = useState("");
   // const router = useRouter();
@@ -23,11 +22,11 @@ const Search = ({
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
     if (term) {
-      params.set('query', term);
+      params.set("query", term);
     } else {
-      params.delete('query');
+      params.delete("query");
     }
-    replace( `${pathname}?${params.toString()}`)
+    replace(`${pathname}?${params.toString()}`);
   }
 
   // useEffect(() => {
@@ -54,7 +53,7 @@ const Search = ({
   // }, [query, searchParams, router]);
 
   return (
-    <div className=" relative flex min-h-[54px] min-w-[704px] items-center justify-center overflow-hidden rounded-lg bg-[#A4A4A4] px-4 ">
+    <div className=" relative flex min-h-[54px] w-full max-w-[704px] items-center justify-center overflow-hidden rounded-lg bg-[#A4A4A4] px-4 ">
       <Image
         src="/assets/icons/search.svg"
         alt="search"
@@ -71,7 +70,11 @@ const Search = ({
         // onChange={(e) => setQuery(e.target.value)}
         className="border-0 bg-[#A4A4A4] ps-9 text-base font-medium  leading-[24px] outline-offset-0 placeholder:text-black focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
       />
-      |{children}
+      <div className="flex w-full items-center gap-4 max-md:hidden">
+        |
+        <CategoryFilter />
+      </div>
+      {/* |{children} */}
     </div>
   );
 };

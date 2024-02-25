@@ -61,7 +61,7 @@ const CategoryFilter = () => {
 
   return (
     <Select onValueChange={(value: string) => onSelectCategory(value)}>
-      <SelectTrigger className="border-none bg-[#A4A4A4] focus:ring-[#A4A4A4] focus-visible:ring-[#A4A4A4]">
+      <SelectTrigger className=" max-w-[704px] bg-[#A4A4A4] selection:border-none focus:ring-[#A4A4A4] focus-visible:ring-[#A4A4A4] ">
         <SelectValue placeholder="Todas as categorias" className="italic" />
       </SelectTrigger>
       <SelectContent>

@@ -16,14 +16,14 @@ export default async function Home({ searchParams }: SearchParamProps) {
     page,
     category,
   });
-  
 
   return (
     <div className="m-auto flex max-w-[1200px] flex-wrap  justify-center gap-5 p-5">
-      <div className="flex w-full items-center justify-center gap-5  ">
-        <Search>
-          <CategoryFilter />
-        </Search>
+      <div className="flex w-full flex-col items-center justify-center gap-5  ">
+        <Search />
+        <div className="w-full md:hidden">
+        <CategoryFilter />
+        </div>
       </div>
       <ContainerCard
         data={posts?.data}

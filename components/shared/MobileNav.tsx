@@ -3,7 +3,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import Logo from "./Logo";
-
+import Link from "next/link";
 
 const MobileNav = () => {
   return (
@@ -23,9 +23,11 @@ const MobileNav = () => {
             <Logo color="Dark" />
           </div>
           <Separator className="border border-gray-400" />
-          <Button className="rounded-lg bg-[#f28000] p-6 hover:bg-[#F38C19]">
-            Criar anúncio
-          </Button>
+          <Link href="post/create">
+            <Button className=" w-full rounded-lg bg-[#f28000] p-6 hover:bg-[#F38C19]">
+              Criar anúncio
+            </Button>
+          </Link>
         </SheetContent>
       </Sheet>
     </nav>
