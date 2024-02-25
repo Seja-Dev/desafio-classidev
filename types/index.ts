@@ -42,8 +42,8 @@ export type DeletePostParams = {
 };
 
 export type GetAllPostsParams = {
-  query: string;
-  category: string;
+  query?: string;
+  category?: string;
   limit: number;
   page: number;
 };
