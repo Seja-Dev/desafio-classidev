@@ -24,7 +24,6 @@ export type CreatePostParams = {
     name: string;
     description: string;
     categoryId: string;
-    price: string;
   };
   path: string;
 };
@@ -55,7 +54,6 @@ export type UpdatePostParams = {
     name: string;
     description: string;
     categoryId: string;
-    price: string;
   };
 
   path: string;

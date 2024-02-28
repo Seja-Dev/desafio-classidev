@@ -29,13 +29,13 @@ interface PostFormProps {
 }
 
 const PostForm = ({ userId, type, post, postId }: PostFormProps) => {
+  const router = useRouter();
   const initalValues =
     post && type === "Update"
       ? {
           ...post,
         }
       : postDefaultValues;
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

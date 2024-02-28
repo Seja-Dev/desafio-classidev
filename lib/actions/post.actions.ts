@@ -12,7 +12,6 @@ import { connectToDatabase } from "../database";
 import User from "../database/models/user.model";
 import Post from "../database/models/post.model";
 import Category from "../database/models/category.model";
-import console from "console";
 
 const getCategoryByName = async (name: string) => {
   return Category.findOne({ name: { $regex: name, $options: "i" } });
@@ -20,7 +19,11 @@ const getCategoryByName = async (name: string) => {
 
 const populatePost = (query: any) => {
   return query
-    .populate({path: "createdBy", model: User,select: "_id firstName lastName", })
+    .populate({
+      path: "createdBy",
+      model: User,
+      select: "_id firstName lastName",
+    })
     .populate({ path: "category", model: Category, select: "_id name" });
 };
 
@@ -41,7 +44,6 @@ export const createPost = async ({ post, userId, path }: CreatePostParams) => {
     return newPost;
   } catch (error) {
     console.error(error);
-    throw new Error(typeof error === "string" ? error : JSON.stringify(error));
   }
 };
 
@@ -53,7 +55,7 @@ export async function getPostById(postId: string) {
 
     if (!post) throw new Error("Post not found");
 
-    return JSON.parse(JSON.stringify(post));
+    return post;
   } catch (error) {
     console.log(error);
   }
@@ -123,41 +125,33 @@ export async function getRelatedPostsByCategory({
   }
 }
 
-
-export async function getPostsByQuery({ query, limit = 6, page }: GetAllPostsParams) {
+export async function getAllPosts({
+  query,
+  limit = 6,
+  page,
+  category,
+}: GetAllPostsParams) {
   try {
     await connectToDatabase();
 
-    const nameCondition = query ? { name: { $regex: query, $options: "i" } } : {};
-    const skipAmount = (Number(page) - 1) * limit;
+    const nameCondition = query
+      ? { name: { $regex: query, $options: "i" } }
+      : {};
 
-    const postsQuery = Post.find(nameCondition)
-      .sort({ createdAt: "desc" })
-      .skip(skipAmount)
-      .limit(limit);
+    const categoryCondition = category
+      ? await getCategoryByName(category)
+      : null;
 
-    const posts = await populatePost(postsQuery);
-    const postsCount = await Post.countDocuments(nameCondition);
-
-    return {
-      data: JSON.parse(JSON.stringify(posts)),
-      totalPages: Math.ceil(postsCount / limit),
+    const conditions = {
+      $and: [
+        nameCondition,
+        categoryCondition ? { category: categoryCondition._id } : {},
+      ],
     };
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export async function getPostsByCategory({ category, limit = 6, page }: GetAllPostsParams) {
-  try {
-    await connectToDatabase();
-
-    const categoryCondition = category ? await getCategoryByName(category) : null;
-    const conditions = categoryCondition ? { category: categoryCondition._id } : {};
 
     const skipAmount = (Number(page) - 1) * limit;
     const postsQuery = Post.find(conditions)
-      .sort({ createdAt: "desc" })
+      .sort({ createdDate: "desc" })
       .skip(skipAmount)
       .limit(limit);
 
@@ -172,15 +166,37 @@ export async function getPostsByCategory({ category, limit = 6, page }: GetAllPo
     console.log(error);
   }
 }
-// export async function getAllPosts({query, limit = 6, page, category}: GetAllPostsParams) {
+
+// export async function getPostsByQuery({ query, limit = 6, page }: GetAllPostsParams) {
 //   try {
 //     await connectToDatabase();
 
 //     const nameCondition = query ? { name: { $regex: query, $options: "i" } } : {};
+//     const skipAmount = (Number(page) - 1) * limit;
 
-//     const categoryCondition = category ? await getCategoryByName(category): null;
+//     const postsQuery = Post.find(nameCondition)
+//       .sort({ createdAt: "desc" })
+//       .skip(skipAmount)
+//       .limit(limit);
 
-//     const conditions = { $and: [ nameCondition, categoryCondition ? { category: categoryCondition._id } : {}, ]};
+//     const posts = await populatePost(postsQuery);
+//     const postsCount = await Post.countDocuments(nameCondition);
+
+//     return {
+//       data: JSON.parse(JSON.stringify(posts)),
+//       totalPages: Math.ceil(postsCount / limit),
+//     };
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+// export async function getPostsByCategory({ category, limit = 6, page }: GetAllPostsParams) {
+//   try {
+//     await connectToDatabase();
+
+//     const categoryCondition = category ? await getCategoryByName(category) : null;
+//     const conditions = categoryCondition ? { category: categoryCondition._id } : {};
 
 //     const skipAmount = (Number(page) - 1) * limit;
 //     const postsQuery = Post.find(conditions)

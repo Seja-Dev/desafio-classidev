@@ -7,17 +7,16 @@ import Post from "../database/models/post.model";
 import User from "../database/models/user.model";
 
 export const createUser = async (user: CreateUserParams) => {
-  try{
-   await connectToDatabase() 
+  try {
+    await connectToDatabase();
 
-   const newUser = await User.create(user)
+    const newUser = await User.create(user);
 
-   return newUser
-
-  }catch(error) {
-    console.log(error)
+    return newUser;
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 export async function getUserById(userId: string) {
   try {
@@ -60,12 +59,12 @@ export async function deleteUser(clerkId: string) {
 
     await Post.updateMany(
       { _id: { $in: userToDelete.posts } },
-      { $pull: { organizer: userToDelete._id } }
+      { $pull: { createdBy: userToDelete._id } }
     );
 
     const deletedUser = await User.findByIdAndDelete(userToDelete._id);
 
-    return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
+    return deletedUser || null;
   } catch (error) {
     console.log("Error deleting user", error);
   }

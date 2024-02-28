@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { IPost } from "@/lib/database/models/post.model";
-import { formatPrice } from "@/lib/utils";
+import { formatDate, formatPrice } from "@/lib/utils";
 import Image from "next/image";
 import DeletePost from "./DeletePost";
 
@@ -20,15 +20,17 @@ const Card = ({ post }: CardProps) => {
   const nameCategory = post.category.name;
 
   const containsSpace = nameCategory.indexOf(" ") !== -1;
-  const iconCategory = containsSpace ? nameCategory.split(" ")[0]: nameCategory;
+  const iconCategory = containsSpace
+    ? nameCategory.split(" ")[0]
+    : nameCategory;
 
   return (
     <>
-      <div className="relative flex min-h-[313px] max-w-[334px] flex-col   rounded-lg bg-white p-6">
+      <div className="relative flex min-h-[313px] max-w-[334px] flex-col  rounded-lg bg-white p-6">
         <Link href={`/post/${post._id}`}>
           <div className="flex flex-col">
             <h2 className="text-4xl font-bold">{post.name}</h2>
-            <p className="text-sm italic">Postado em 20/03/2022</p>
+            <p className="text-sm italic">{formatDate(post.createdDate)}</p>
             <span className="mt-2 text-xl font-bold">
               {formatPrice(Number(post.price))}
             </span>

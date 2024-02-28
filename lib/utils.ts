@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(data: string) {
+export function formatDate(data: Date) {
   const dataObj = new Date(data);
   const dia = String(dataObj.getDate()).padStart(2, "0");
   const mes = String(dataObj.getMonth() + 1).padStart(2, "0");
