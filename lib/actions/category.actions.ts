@@ -30,7 +30,7 @@ export const insertCategory = async () => {
   try {
     await connectToDatabase();
     const newCategory = await Category.insertMany(categories);
-    return newCategory;
+    return JSON.parse(JSON.stringify(newCategory));
   } catch (error) {
     console.error(error);
   }

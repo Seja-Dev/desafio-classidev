@@ -15,7 +15,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
   const posts = await getAllPosts({
     query: searchText,
-    limit: 6,
+    limit: 9,
     page,
     category,
   });

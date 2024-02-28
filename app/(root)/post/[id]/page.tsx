@@ -47,34 +47,36 @@ const page = async ({ params: { id }, searchParams }: PageProps) => {
 
   return (
     <section className="flex min-h-screen flex-col items-center gap-8 bg-[#0E0E0E]">
-      <section className="m-auto  flex max-w-[1200px] items-center justify-center  p-5">
+      <section className="m-0 flex w-full max-w-[1300px] p-5">
         <div className="flex flex-col gap-12">
           <Link href="/" className="mb-8 flex text-white underline">
             <ArrowLeftIcon />
             <p>Voltar para a página inicial</p>
           </Link>
-          <div className="flex flex-col gap-1">
-            <div className="flex items-baseline gap-8">
+          <div className="flex flex-col gap-1 ">
+            <div className="flex flex-col items-baseline gap-4 md:flex-row">
               <h3 className="text-5xl font-bold text-white">{post.name}</h3>
-              {isPostCreator && (
-                <>
-                  <Link
-                    href={`/post/create/${post._id}/update`}
-                    className="flex items-center gap-2 text-white underline"
-                  >
-                    <Image
-                      src="/assets/icons/edit.svg"
-                      alt="edit"
-                      width={20}
-                      height={20}
-                    />
-                    Editar
-                  </Link>
-                  <div className=" text-white underline">
-                    <DeletePost postId={post._id}>Excluir</DeletePost>
-                  </div>
-                </>
-              )}
+              <div className="flex gap-2 pb-4">
+                {isPostCreator && (
+                  <>
+                    <Link
+                      href={`/post/create/${post._id}/update`}
+                      className="flex items-center gap-2 text-white underline"
+                    >
+                      <Image
+                        src="/assets/icons/edit.svg"
+                        alt="edit"
+                        width={20}
+                        height={20}
+                      />
+                      Editar
+                    </Link>
+                    <div className=" text-white underline">
+                      <DeletePost postId={post._id}>Excluir</DeletePost>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
             <p className="flex items-center gap-2 font-bold text-white">
               {CATEGORY_ICON[post.category.name as keyof typeof CATEGORY_ICON]}{" "}
@@ -105,18 +107,21 @@ const page = async ({ params: { id }, searchParams }: PageProps) => {
           </div>
         </div>
       </section>
-      <section className="flex  flex-col  gap-4">
-        <h3 className="py-5 text-4xl font-bold text-white">
-          Postagens relacionadas
-        </h3>
 
-        <ContainerCard
-          data={relatedPosts?.data}
-          limit={9}
-          page={1}
-          totalPages={2}
-        />
-      </section>
+      {relatedPosts?.data.length > 0 && (
+        <section className="flex w-full max-w-[1300px] flex-col gap-4 p-5 pt-10">
+          <h3 className=" py-10 text-4xl font-bold text-white">
+            Postagens relacionadas
+          </h3>
+
+          <ContainerCard
+            data={relatedPosts?.data}
+            limit={6}
+            page={1}
+            totalPages={post.totalPages}
+          />
+        </section>
+      )}
     </section>
   );
 };

@@ -41,7 +41,7 @@ export const createPost = async ({ post, userId, path }: CreatePostParams) => {
       createdBy: userId,
     });
     revalidatePath(path);
-    return newPost;
+    return JSON.parse(JSON.stringify(newPost));
   } catch (error) {
     console.error(error);
   }
@@ -55,7 +55,7 @@ export async function getPostById(postId: string) {
 
     if (!post) throw new Error("Post not found");
 
-    return post;
+    return JSON.parse(JSON.stringify(post));
   } catch (error) {
     console.log(error);
   }

@@ -13,15 +13,14 @@ interface ContainerCarsProps {
 
 const ContainerCard = ({
   data,
-  limit,
   page,
   totalPages = 0,
   urlParamName,
 }: ContainerCarsProps) => {
   return (
-    <div className="flex min-h-[600px] flex-col items-center justify-between">
+    <div className="flex flex-col items-center justify-between">
       {data.length > 0 ? (
-        <div className="m-auto flex max-w-[1200px] flex-wrap justify-center gap-5 p-5">
+        <div className=" flex w-full max-w-[1300px] flex-wrap gap-5 pb-11">
           {data.map((post) => (
             <Card post={post} key={post._id} />
           ))}

@@ -12,7 +12,7 @@ export const createUser = async (user: CreateUserParams) => {
 
     const newUser = await User.create(user);
 
-    return newUser;
+    return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
     console.log(error);
   }
@@ -25,7 +25,7 @@ export async function getUserById(userId: string) {
     const user = await User.findById(userId);
 
     if (!user) throw new Error("User not found");
-    return user;
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.log("Error getting user by ID", error);
   }
@@ -40,7 +40,8 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
     });
 
     if (!updatedUser) throw new Error("User update failed");
-    return updatedUser;
+    return JSON.parse(JSON.stringify(updatedUser));
+
   } catch (error) {
     console.log("Error updating user", error);
   }
@@ -64,7 +65,7 @@ export async function deleteUser(clerkId: string) {
 
     const deletedUser = await User.findByIdAndDelete(userToDelete._id);
 
-    return deletedUser || null;
+    return deletedUser? JSON.parse(JSON.stringify(deletedUser)) : null;
   } catch (error) {
     console.log("Error deleting user", error);
   }
